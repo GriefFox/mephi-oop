@@ -28,8 +28,12 @@ namespace Prog1 {
             before = *tmp;
             tmp++;
         }
+
         last = before[strlen(before)-1];
-        lastlast = before[strlen(before) - 2];
+        if (strlen(before) > 1)
+          lastlast = before[strlen(before) - 2];
+        else 
+          lastlast = '\x00';
         do{
             a = getline(&buf, &size, fd);
             size = strlen(buf);
@@ -76,6 +80,7 @@ namespace Prog1 {
         }while(a != -1);
         if (laststr == NULL){
             if (lastlaststr == NULL){
+                free(buf);
                 fclose(fd);
                 throw std::runtime_error("Couldn't find a city");
             }

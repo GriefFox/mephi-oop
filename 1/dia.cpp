@@ -53,6 +53,10 @@ void chr_dia(){
     try {                
         res = game((const char **) inp);
     } catch(...) {
+        for (int i = 0; i<b;i++){
+          delete[] inp[i];
+        }
+        delete[] inp;
         throw;
     }
     printf("Result: %s\n", res);
