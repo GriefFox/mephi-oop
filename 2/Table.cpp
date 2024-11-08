@@ -6,6 +6,7 @@
 #include <iostream>
 #include <algorithm>
 
+
 namespace prog2 {
 uint Table::_correct_size(uint n){
     return (n - n % 2) * 2;
@@ -28,13 +29,6 @@ uint Table::_correct_size(uint n){
       table[i] = tmp;
     }
     _sort();
-  }
-
-  Table::Table(const Table &other) noexcept: _allocated(other._allocated), size(other.size){
-    table = new Resource*[_allocated];
-    for (uint i=0;i< size; i++){
-      table[i] = new Resource(*other.table[i]);
-    }
   }
 
   Resource& Table::operator[](const std::string& name) {
@@ -79,23 +73,6 @@ uint Table::_correct_size(uint n){
 }
 
 
-  Table& Table::operator=(const Table& other) noexcept{
-    if (this != &other) { // Проверяем на самоприсвоение
-    // Освобождаем старые ресурсы
-      for (uint i = 0; i < size; ++i) {
-        delete table[i];
-      }
-
-      _allocated = other._allocated;
-      size = other.size;
-      table = new Resource*[other._allocated];
-      for (uint i = 0; i < size; ++i) {
-        table[i] = new Resource(*other.table[i]); // Копируем каждый ресурс
-      }
-    }
-    return *this;
-  }
-
   Table &Table::operator= (Table &&other) noexcept {
     // Проверяем самоприсваивание
     if (this == &other) {
@@ -125,12 +102,16 @@ uint Table::_correct_size(uint n){
   Table& Table::operator+=(const Resource &rhs){
     if (this->_allocated == 0){
       this->_allocated = 2;
+      delete[] this->table;
       this->table = new Resource*[this->_allocated];
     }
 
     if (this->size == this->_allocated){
       Resource **tmp = new Resource*[_correct_size(this->_allocated)];
-      std::copy(this->table, this->table+this->_allocated, tmp);
+      for (uint i=0; i<this->size; i++)
+        tmp[i] = table[i];
+      delete[] this->table;
+      this->table = tmp;
       this->_allocated = _correct_size(this->_allocated);
     }
     this->table[this->size] = new Resource(rhs);
@@ -200,4 +181,15 @@ uint Table::_correct_size(uint n){
     }
     return os;
   } 
+  std::istream& operator >> (std::istream &is, Table &tab){
+    // firsly we ask how many Resources we need to add
+    uint size = 0;
+    is >> size;
+    for (uint i=0; i<size; i++){
+      Resource tmp;
+      is >> tmp;
+      tab += tmp;
+    }
+    return is;
+  }
 }

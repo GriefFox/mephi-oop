@@ -16,12 +16,3 @@ add_library(rouce Table.hpp Table.cpp Resource.hpp Resource.cpp)
 link_libraries(rouce)
 
 add_executable(main main.cpp)
-
-add_compile_options(-fprofile-arcs -ftest-coverage)
-link_libraries(gcov)
-
-#add_compile_options(--coverage)
-#add_link_options(--coverage)
-add_executable(test test.cpp)
-
-target_link_libraries(test PRIVATE Catch2::Catch2WithMain)

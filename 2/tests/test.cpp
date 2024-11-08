@@ -92,8 +92,25 @@ TEST_CASE("Table funcs"){
   REQUIRE(t["4"].getEffi() == 0);
 
   REQUIRE(t.del_res("5") == false);
-  REQUIRE(t.del_res("4") == true);
+  REQUIRE(t.del_res("1") == true);
+}
 
+TEST_CASE("table find check"){
+  Resource r1("1", 1);
+  Resource r2("2", 1);
+  Resource r3("3", 1);
+  Resource r4("4", 1);
+  Resource r5("5", 1);
+  Resource rs[5]{r1,r2,r3,r4,r5};
+  Table t(rs, 5);
+
+  REQUIRE(t["1"] == r1);
+  REQUIRE(t["2"] == r2);
+  REQUIRE(t["3"] == r3);
+  REQUIRE(t["4"] == r4);
+  REQUIRE(t["5"] == r5);
+}
+TEST_CASE("check_size tests"){
   Resource small[0];
   Table table(small, 0);
   REQUIRE(table.check_size() == prog2::Table::empty);
@@ -101,12 +118,62 @@ TEST_CASE("Table funcs"){
   table += odin;
 
   REQUIRE(table.check_size() == prog2::Table::partially);
+  Resource dva("dva", 2);
+  table += dva;
+  REQUIRE(table.check_size() == prog2::Table::full);
+  Resource tri("tri", 3);
+  table += tri;
+  REQUIRE(table.check_size() == prog2::Table::partially);
 
 }
+
+TEST_CASE("moving/coping constructors"){
+  Table t1;
+  Resource r1("1", 1);
+  t1+=r1;
+  Table tc = t1;
+  
+  REQUIRE(tc.size == t1.size);
+  REQUIRE((*tc.table[0]) == (*t1.table[0]));
+  Table tm;
+  tm = std::move(t1);
+
+  REQUIRE(t1.size == 0);
+  REQUIRE(t1.table == nullptr);
+
+  REQUIRE(tm.size == 1);
+  REQUIRE((*tm.table[0]) == (*tc.table[0]));
+  }
 
 TEST_CASE("outputs"){
   Resource d("1", 100, 200, 300);
   std::stringstream out;  
   out << d;
   REQUIRE(out.str() == "1 consumption: 100 efficiency: 200 price: 300");
+  Table t;
+  t += d;
+  out.str(std::string());
+  out << t;
+  REQUIRE(out.str() == "1 consumption: 100 efficiency: 200 price: 300\n");
+  }
+
+TEST_CASE("inputs resource"){
+  std::string str = "tovar 100 200 300\n";
+  std::istringstream istream(str);
+  Resource r;
+  istream >> r;
+  REQUIRE(r.getName() == "tovar");
+  REQUIRE(r.getCons() == 100);
+  REQUIRE(r.getEffi() == 200);
+  REQUIRE(r.getPrice() == 300);
+}
+
+TEST_CASE("input table"){
+  std::string str = "1\ntovar 100 200 300\n";
+  std::istringstream istream(str);
+  Table t;
+  istream >> t;
+  REQUIRE(t.size == 1);
+  Resource test("tovar", 100, 200, 300);
+  REQUIRE((*t.table[0]) == test);
 }

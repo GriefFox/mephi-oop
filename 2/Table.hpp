@@ -18,7 +18,13 @@ namespace prog2 {
       Resource **table;
       ~Table(); // Деструктор
       explicit Table() noexcept: _allocated(0), size(0),  table(nullptr){};
-      explicit Table(const Table&other) noexcept; // копирующий конструктор
+      
+      Table(const Table &other) : _allocated(other._allocated), size(other.size) {
+        table = new Resource*[_allocated];
+        for (uint i = 0; i < size; ++i) {
+            table[i] = new Resource(*other.table[i]); // Глубокое копирование каждого ресурса
+        }
+      }
       Table(Table &&other) noexcept; // перемещающий конструктор
       Table &operator= (const Table &) noexcept; // копирующий оператор
       Table &operator= (Table &&other) noexcept; // перемещающий оператор
@@ -40,7 +46,7 @@ namespace prog2 {
       stat check_size(); // return how many you can add without another allocating memory
   };
 
-  std::ostream& operator>>(std::ostream &os, Table&rhs);
+  std::istream& operator>>(std::istream &is, Table&rhs);
   std::ostream& operator<<(std::ostream &os, Table&rhs);
 }
 
