@@ -19,12 +19,7 @@ namespace prog2 {
       ~Table(); // Деструктор
       explicit Table() noexcept: _allocated(0), size(0),  table(nullptr){};
       
-      Table(const Table &other) : _allocated(other._allocated), size(other.size) {
-        table = new Resource*[_allocated];
-        for (uint i = 0; i < size; ++i) {
-            table[i] = new Resource(*other.table[i]); // Глубокое копирование каждого ресурса
-        }
-      }
+      Table(const Table &other);
       Table(Table &&other) noexcept; // перемещающий конструктор
       Table &operator= (const Table &) noexcept; // копирующий оператор
       Table &operator= (Table &&other) noexcept; // перемещающий оператор

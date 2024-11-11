@@ -18,6 +18,13 @@ uint Table::_correct_size(uint n){
     });
   }
 
+  Table::Table(const Table &other) : _allocated(other._allocated), size(other.size){
+    table = new Resource*[_allocated];
+    for(uint i=0; i < size; ++i){
+      table[i] = new Resource(*other.table[i]);
+    }
+  }
+
   Table::Table(Resource *rhs, uint a){
     _allocated = _correct_size(a);
     size = a;
