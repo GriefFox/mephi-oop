@@ -35,7 +35,7 @@ namespace prog2 {
       Table &operator += (const Resource &rhs);
       double proffit()const;
       Table &operator * (double n);
-      bool del_res(std::string name); 
+      void del_res(std::string name); 
       bool rename(std::string oname, std::string nname);
       
       enum stat{

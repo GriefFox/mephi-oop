@@ -91,8 +91,8 @@ TEST_CASE("Table funcs"){
   REQUIRE(t["4"].getCons() == 600);
   REQUIRE(t["4"].getEffi() == 0);
 
-  REQUIRE(t.del_res("5") == false);
-  REQUIRE(t.del_res("1") == true);
+  REQUIRE_THROWS(t.del_res("5"));
+  REQUIRE_NOTHROW(t.del_res("1"));
 }
 
 TEST_CASE("table find check"){

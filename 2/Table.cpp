@@ -129,7 +129,7 @@ uint Table::_correct_size(uint n){
     return full;
   }
 
-  bool Table::del_res(std::string name){
+  void Table::del_res(std::string name){
     for (uint i=0; i < this->size; ++i){
       if ((this->table)[i]->getName() == name){
         delete (this->table)[i];
@@ -140,10 +140,10 @@ uint Table::_correct_size(uint n){
 
         this->size--;
         this->table[this->size] = nullptr;
-        return true;
+        return;
       }
     }
-    return false;
+    throw std::runtime_error("Resource not found: " + name);
   }
 
   bool Table::rename(std::string oname, std::string nname){
