@@ -133,16 +133,20 @@ TEST_CASE("moving/coping constructors"){
   t1+=r1;
   Table tc = t1;
   
-  REQUIRE(tc.size == t1.size);
-  REQUIRE((*tc.table[0]) == (*t1.table[0]));
+  REQUIRE(tc.check_size() == t1.check_size() );
+  REQUIRE((tc["1"]) == (t1["1"]));
   Table tm;
   tm = std::move(t1);
 
-  REQUIRE(t1.size == 0);
-  REQUIRE(t1.table == nullptr);
+  REQUIRE(t1.check_size() == prog2::Table::empty);
 
-  REQUIRE(tm.size == 1);
-  REQUIRE((*tm.table[0]) == (*tc.table[0]));
+  REQUIRE(tm.check_size() == prog2::Table::partially);
+  REQUIRE((tm["1"]) == (tc["1"]));
+
+  Table tc1;
+  tc1 = tm;
+  REQUIRE(tc1.check_size() == tm.check_size());
+  REQUIRE(tc1["1"] == tm["1"]);
   }
 
 TEST_CASE("outputs"){
@@ -173,7 +177,7 @@ TEST_CASE("input table"){
   std::istringstream istream(str);
   Table t;
   istream >> t;
-  REQUIRE(t.size == 1);
+  REQUIRE(t.check_size() == prog2::Table::partially);
   Resource test("tovar", 100, 200, 300);
-  REQUIRE((*t.table[0]) == test);
+  REQUIRE((t["tovar"]) == test);
 }

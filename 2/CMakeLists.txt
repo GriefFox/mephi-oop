@@ -14,5 +14,3 @@ add_library(rouce Table.hpp Table.cpp Resource.hpp Resource.cpp)
 # подключение библиотеки prog1 ко всем таргетам, создаваемым далее
 # альтернатива: target_link_libraries(main prog)
 link_libraries(rouce)
-
-add_executable(main main.cpp)

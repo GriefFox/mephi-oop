@@ -6,43 +6,174 @@
 #include "Resource.hpp"
 
 namespace prog2 {
+    /**
+      @brief Класс для представления таблицы ресурсов.
+     
+       Класс управляет коллекцией ресурсов и предоставляет методы для
+      добавления, удаления и изменения ресурсов, а также для получения
+      информации о них.
+     */
     class Table{
     private:
-
-      uint _allocated;
-      uint _correct_size(uint);
-      void _sort();
+        uint _allocated; ///< Количество выделенной памяти для ресурсов.
+        uint _correct_size(uint); ///< Проверяет корректный размер.
+        void _sort(); ///< Сортирует таблицу ресурсов.
+        uint size; ///< Текущий размер таблицы.
+        Resource **table; ///< Указатель на массив ресурсов.
 
     public:
-      uint size;
-      Resource **table;
-      ~Table(); // Деструктор
-      explicit Table() noexcept: _allocated(0), size(0),  table(nullptr){};
+
+      /**
+          @brief Деструктор.
+         
+          Освобождает память, занятую ресурсами в таблице.
+         */
+        ~Table(); // Деструктор
       
-      Table(const Table &other);
-      Table(Table &&other) noexcept; // перемещающий конструктор
-      Table &operator= (const Table &) noexcept; // копирующий оператор
-      Table &operator= (Table &&other) noexcept; // перемещающий оператор
-      Table(Resource *rhs, uint a);
+      /**
+          @brief Конструктор по умолчанию.
+         
+          Инициализирует таблицу с нулевым размером и без выделенной памяти.
+         */
+        explicit Table() noexcept : _allocated(0), size(0), table(nullptr) {};
+
+        /**
+          @brief Конструктор копирования.
+         
+          Создает новую таблицу, копируя ресурсы из другой таблицы.
+          @param other Объект таблицы, из которой будут скопированы ресурсы.
+         */
+        Table(const Table &other);
+
+        /**
+          @brief Перемещающий конструктор.
+         
+          Перемещает ресурсы из другой таблицы в новую.
+          @param other Объект таблицы, ресурсы из которой будут перемещены.
+         */
+        Table(Table &&other) noexcept;
+
+        /**
+          @brief Копирующий оператор присваивания.
+         
+          Копирует ресурсы из одной таблицы в другую.
+          @param other Объект таблицы, из которой будут скопированы ресурсы.
+          @return Ссылка на текущий объект.
+         */
+        Table &operator= (const Table &) noexcept;
+
+        /**
+          @brief Перемещающий оператор присваивания.
+         
+          Перемещает ресурсы из одной таблицы в другую.
+          @param other Объект таблицы, ресурсы из которой будут перемещены.
+          @return Ссылка на текущий объект.
+         */
+        Table &operator= (Table &&other) noexcept;
+
+        /**
+          @brief Конструктор с параметрами.
+         
+          Инициализирует таблицу ресурсами из массива.
+          @param rhs Указатель на массив ресурсов.
+          @param a Количество ресурсов в массиве.
+         */
+        Table(Resource *rhs, uint a);
+
+        /**
+          @brief Получение ресурса по имени.
+         
+          Позволяет получить доступ к ресурсу по его имени.
+          @param name Имя ресурса.
+          @return Ссылка на ресурс с указанным именем.
+          @throw Ошибка если ресурса с таким именем нет.
+         */
+        Resource& operator [] (const std::string &name);
+
+        /**
+          @brief Добавление ресурса в таблицу.
+         
+          Добавляет ресурс в таблицу и обновляет ее состояние.
+          @param rhs Ресурс, который нужно добавить.
+          @return Ссылка на текущую таблицу.
+         */
+        Table &operator += (const Resource &rhs);
+
+        /**
+          @brief Вычисление прибыли от всех ресурсов в таблице.
+         
+          @return Прибыль от всех ресурсов в таблице.
+         */
+        double proffit() const;
+
+        /**
+          @brief Умножение всех ресурсов на коэффициент.
+         
+          Умножает прибыль всех ресурсов на заданное число.
+          @param n Коэффициент, на который нужно умножить прибыль.
+          @return Ссылка на текущую таблицу.
+         */
+        Table &operator * (double n);
+
+        /**
+          @brief Удаление ресурса по имени.
+         
+          Удаляет ресурс с указанным именем из таблицы.
+          @param name Имя ресурса, который нужно удалить.
+          @throw Ошибка если ресурса с таким именем нет.
+         */
+        void del_res(std::string name);      
+        /**
+          @brief Переименование ресурса в таблице.
+         
+          Переименовывает ресурс с одного имени на другое.
+          @param oname Старое имя ресурса.
+          @param nname Новое имя ресурса.
+          @return true Если переименование прошло успешно, иначе false.
+          @throw Ошибка если ресурса с таким именем нет.
+         */
+        bool rename(std::string oname, std::string nname);
+
+        /**
+          @brief енумератор для возвращаемых значений функции check_size
+         */
+      enum stat {
+            empty,      ///< Таблица пуста.
+            partially,  ///< Таблица частично заполнена.
+            full        ///< Таблица полностью заполнена.
+        };
+
+      /**
+          @brief Проверка состояния таблицы.
+         
+          Возвращает статус заполненности таблицы и количество ресурсов,
+          которые можно добавить без дополнительного выделения памяти.
+          @return Статус заполненности таблицы.
+         */
+      stat check_size();
+                         
+      /**
+      @brief Оператор ввода для класса Table.
+     
+      Позволяет загружать данные о ресурсах из потока ввода в таблицу.
+      @param is Входной поток данных.
+      @param rhs Объект класса Table, в который будут загружены данные.
+      @return Ссылка на входной поток данных.
+     */
+        friend std::istream& operator>>(std::istream &is, Table&rhs);
 
 
-      Resource& operator [] (const std::string &name);
-      Table &operator += (const Resource &rhs);
-      double proffit()const;
-      Table &operator * (double n);
-      void del_res(std::string name); 
-      bool rename(std::string oname, std::string nname);
-      
-      enum stat{
-        empty,
-        partially,
-        full
-      };
-      stat check_size(); // return how many you can add without another allocating memory
+      /**
+      @brief Оператор вывода для класса Table.
+     
+      Позволяет выводить данные о ресурсах из таблицы в выходной поток.
+      @param os Выходной поток данных.
+      @param rhs Объект класса Table, данные которого будут выведены.
+      @return Ссылка на выходной поток данных.
+     */
+        friend std::ostream& operator<<(std::ostream &os, Table&rhs);
   };
 
-  std::istream& operator>>(std::istream &is, Table&rhs);
-  std::ostream& operator<<(std::ostream &os, Table&rhs);
 }
 
 #endif

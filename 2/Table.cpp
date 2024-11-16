@@ -78,6 +78,28 @@ uint Table::_correct_size(uint n){
     other.size = 0;
     other.table = nullptr;
 }
+  
+  Table &Table::operator= (const Table &other) noexcept {
+        if (this == &other) {
+            return *this; // Handle self-assignment
+        }
+
+        // Clean up existing resources
+        for (uint i = 0; i < size; ++i) {
+            delete table[i];
+        }
+        delete[] table;
+
+        // Copy data from other
+        _allocated = other._allocated;
+        size = other.size;
+        table = new Resource*[size];
+        for (uint i = 0; i < size; ++i) {
+            table[i] = new Resource(*other.table[i]); // Deep copy of each Resource
+        }
+
+        return *this;
+  }
 
 
   Table &Table::operator= (Table &&other) noexcept {
@@ -179,7 +201,7 @@ uint Table::_correct_size(uint n){
     }
     return res;
   }
-
+/*
   std::ostream& operator << (std::ostream &os, Table &tab){
     for (uint i=0; i<tab.size;i++){
 
@@ -199,4 +221,25 @@ uint Table::_correct_size(uint n){
     }
     return is;
   }
+  */
+
+std::ostream& operator<<(std::ostream &os, Table &tab) {
+        for (uint i = 0; i < tab.size; i++) {
+            os << *(tab.table[i]) << std::endl; // Доступ к приватному полю table
+        }
+        return os;
+    }
+
+    std::istream& operator>>(std::istream &is, Table &tab) {
+        // Сначала запрашиваем, сколько ресурсов нужно добавить
+        uint size = 0;
+        is >> size;
+        for (uint i = 0; i < size; i++) {
+            Resource tmp;
+            is >> tmp; // Предполагается, что у Resource также есть перегруженный оператор >>
+            tab += tmp; // Доступ к методу добавления ресурса
+        }
+        return is;
+    }
+
 }
