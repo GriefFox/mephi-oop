@@ -1,0 +1,267 @@
+#include <SFML/Graphics.hpp>
+#include <cmath>
+#include <iostream>
+#include "game_headers/Mission.hpp"
+#include "game_headers/Table.hpp"
+#include "game_headers/Ship.hpp"
+#include "LoadoutWindow.h"
+#ifdef __linux__
+#include <X11/Xlib.h>
+#endif
+
+class DrawableShip{
+    private:
+        sf::Texture texture;
+
+    public:
+        sf::Sprite sprite;
+        std::shared_ptr<zasada::Ship> ship;
+        bool ally;
+
+        DrawableShip(std::shared_ptr<zasada::Ship> shipPtr) : ship(std::move(shipPtr)){}
+
+        void loadTexture(const std::string& textureFile) {
+            if (!texture.loadFromFile(textureFile)) {
+                throw std::runtime_error("Failed to load texture from file: " + textureFile);
+            }
+            sprite.setTexture(texture);
+            sprite.setOrigin(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2); // Center origin
+            sprite.setPosition(ship->getPosition().x, ship->getPosition().y);
+        }
+        void setSpritePosition(float x, float y) {
+            sprite.setPosition(x, y);
+        }
+        void updatePositionFromShip() {
+            sprite.setPosition(static_cast<float>(ship->getPosition().x), static_cast<float>(ship->getPosition().y));
+        }
+
+        void moveTowards(sf::Vector2i targetPosition){ //, float deltaTime) {
+            ship->move({(double) targetPosition.x, (double) targetPosition.y});
+            sprite.setPosition(ship->getPosition().x, ship->getPosition().y);
+    }
+
+        void setRotation(float angle){
+            sprite.setRotation(angle);
+        }
+
+        void draw(sf::RenderWindow& window) {
+            window.draw(sprite);
+        }
+};
+
+const int TARGET_FPS = 60;
+const float FRAME_TIME = 1.0f / TARGET_FPS;
+const int WIDTH = 1600;
+const int HEIGHT = 900;
+
+void setup(sf::RenderWindow& window, int width, int height) {
+    int x = 0, y = 0;
+    #ifdef __linux__
+    Display* display = XOpenDisplay(NULL);
+    if (display) {
+        Screen* screen = DefaultScreenOfDisplay(display);
+        int screenWidth = screen->width;
+        int screenHeight = screen->height;
+        x = (screenWidth - width) / 2;
+        y = (screenHeight - height) / 2;
+        XCloseDisplay(display);
+    }
+    #endif
+
+    window.setPosition(sf::Vector2i(10, 10));
+}
+
+void initializeWindow(sf::RenderWindow& window, int width, int height, const std::string& title) {
+    window.create(sf::VideoMode(width, height), title, sf::Style::Close);
+    setup(window, width, height);
+}
+
+bool isMouseOverButton(const sf::RectangleShape& button, const sf::RenderWindow& window) {
+    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+    return button.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos));
+}
+
+void handleEvents(sf::RenderWindow& window, bool switchToMain, zasada::Mission&mission){
+    sf::Event event;
+    while (window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed)
+            window.close();
+        auto defShipIter = mission.getTableDefender().begin();
+        auto attShipIter = mission.getTableAttacker().begin();
+
+        if (defShipIter != mission.getTableDefender().end() && attShipIter != mission.getTableAttacker().end()) {
+            std::shared_ptr<zasada::Ship> defShip = (*defShipIter).second;
+            std::shared_ptr<zasada::Ship> attShip = (*attShipIter).second;
+
+            double dist = zasada::calculate_distace(defShip->getPosition(), attShip->getPosition());
+        }
+    }
+}
+
+std::mutex fightMutex;
+
+void calculateFightResult(zasada::Mission& mission) {
+    std::vector<std::shared_ptr<zasada::Ship>> att_ships;
+    std::vector<std::shared_ptr<zasada::Ship>> def_ships;
+
+    for (const auto& [_, ship] : mission.getTableDefender()) {
+        def_ships.emplace_back(ship);
+    }
+    for (const auto& [_, ship] : mission.getTableAttacker()) {
+        att_ships.emplace_back(ship);
+    }
+
+    std::vector<std::thread> threads;
+    // for (auto& attacker : att_ships){
+    //     threads.emplace_back([attacker, &def_ships](){
+    //         std::lock_guard<std::mutex> lock(fightMutex);
+    //         auto target = def_ships[rand() % def_ships.size()];
+    //         double distance = zasada::calculate_distace(attacker->getPosition(), target->getPosition());
+    //         if (auto cruiser = std::dynamic_pointer_cast<zasada::Cruiser>(attacker)) {
+    //             for (auto& [_, weapon] : cruiser->getWeapons())
+    //                 cruiser->performAttack(weapon, distance, target);
+    //         } else if (auto carrier = std::dynamic_pointer_cast<zasada::Carrier>(attacker)) {
+    //             for (auto& [_, plane] : carrier->getPlanes())
+    //                 carrier->performFlight(plane, distance, target);
+    //         }
+    //     });
+    // }
+    for (auto& attacker : def_ships){
+        threads.emplace_back([attacker, &att_ships](){
+            std::lock_guard<std::mutex> lock(fightMutex);
+            auto target = att_ships[rand() % att_ships.size()];
+            double distance = zasada::calculate_distace(attacker->getPosition(), target->getPosition());
+            if (auto cruiser = std::dynamic_pointer_cast<zasada::Cruiser>(attacker)) {
+                std::cout << cruiser->getWeapon("A")->getName()<< std::endl;
+                for (auto& [_, weapon] : cruiser->getWeapons()){
+                    std::cout << weapon->getName()<< std::endl;
+                    cruiser->performAttack(weapon, distance, target);
+                }
+            } else if (auto carrier = std::dynamic_pointer_cast<zasada::Carrier>(attacker)) {
+                for (auto& [_, plane] : carrier->getPlanes())
+                    carrier->performFlight(plane, distance, target);
+            }
+        });
+    }
+    // for (auto& defender : def_ships) {
+    //     threads.emplace_back([defender, &att_ships]() {
+    //         std::lock_guard<std::mutex> lock(fightMutex);
+    //         auto target = att_ships[rand() % att_ships.size()];
+    //         if (auto cruiser = std::dynamic_pointer_cast<zasada::Cruiser>(defender)) {
+    //             cruiser->performAttack(target);
+    //         } else if (auto carrier = std::dynamic_pointer_cast<zasada::Carrier>(defender)) {
+    //             for (auto& plane: carrier->getPlane())
+    //             double distance = zasada::calculate_distace(carrier->getPosition(), target->getPosition());
+    //             carrier->performFlight( ,distance,target);
+    //         }
+    //     });
+    // }
+
+    for (auto& thread : threads) {
+        if (thread.joinable()) {
+            thread.join();
+        }
+    }
+
+    for (auto ship : att_ships) {
+        std::cout << ship->getHealth() << " " << std::endl;
+    }
+}
+
+void runGameLoop(sf::RenderWindow& gameWindow, zasada::Mission& mission) {
+    sf::Clock clock;
+    sf::Color skyColor(135, 206, 235); // Light blue for the sky
+
+    sf::Texture texture;
+    if (!texture.loadFromFile("Sprites/Destroyer/ShipDestroyerHull.png")) {
+        std::cerr << "Failed to load texture!" << std::endl;
+        return;
+    }
+
+    sf::Vector2i mousePosition;
+    sf::Vector2f spritePosition;
+
+    std::vector<DrawableShip> ships;
+    std::vector<DrawableShip> ships_att;
+    // for (const auto &[key, ship] : mission.getTableDefender()) {
+    //     // Access ship properties or methods
+    //     // ship->doSomething(); // Example method call
+    // }
+    for (const auto& [key, ship] : mission.getTableDefender()) {
+        ships.emplace_back(ship);
+        ships.back().ship->setPosition(mission.getPointA());
+        ships.back().loadTexture("Sprites/Destroyer/ShipDestroyerHull.png");
+        ships.back().setSpritePosition(ship->getPosition().x, ship->getPosition().y);
+        ships.back().ally = true;
+    }
+
+    for (const auto& [key, ship] : mission.getTableAttacker()){
+        ships_att.emplace_back(ship);
+        ships_att.back().ship->setPosition(mission.getPointB());
+        ships_att.back().loadTexture("Sprites/Destroyer/ShipDestroyerHull.png");
+        ships_att.back().setSpritePosition(ship->getPosition().x, ship->getPosition().y);
+        ships_att.back().ally = true;
+    }
+
+    // sf::RectangleShape fadeRectangle(sf::Vector2f(WIDTH, HEIGHT));
+    // fadeRectangle.setFillColor(sf::Color(0, 0, 0, 0));
+
+    while (gameWindow.isOpen()) {
+        handleEvents(gameWindow, false, mission);
+
+        sf::Time elapsed = clock.restart();
+        float deltaTime = elapsed.asSeconds();
+
+        gameWindow.clear(skyColor);
+
+        bool shipsClose = false;
+
+        mousePosition = sf::Mouse::getPosition(gameWindow);
+        for (auto &ship : ships) {
+            ship.moveTowards(mousePosition);
+
+            ship.draw(gameWindow);
+
+            // Calculate the new angle towards the mouse
+            float dx = mousePosition.x - ship.ship->getPosition().x;
+            float dy = mousePosition.y - ship.ship->getPosition().y;
+            float angle = (std::atan2(dy, dx) * 180) / M_PI + 90;
+            ship.setRotation(angle);
+            for (auto& enemy : ships_att) {
+                if (zasada::calculate_distace(ship.ship->getPosition(), enemy.ship->getPosition()) <= 150)
+                    shipsClose = true;
+            }
+        }
+
+        for (auto &ship : ships_att){
+            ship.draw(gameWindow);
+        }
+
+        if (shipsClose) {
+            
+            calculateFightResult(mission);
+            shipsClose = false;
+        }
+
+        gameWindow.display();
+
+        sf::Time frameTime = sf::seconds(FRAME_TIME);
+        if (elapsed < frameTime) {
+            sf::sleep(frameTime - elapsed); 
+        }
+    }
+}
+
+int main() {
+    sf::RenderWindow loadoutWindow;
+    initializeWindow(loadoutWindow, LOADOUT_WIDTH, LOADOUT_HEIGHT, "Loadout Setup");
+    zasada::Mission mission;
+
+    runLoadoutSetup(loadoutWindow, mission);
+    if (!loadoutWindow.isOpen()) {
+        sf::RenderWindow gameWindow;
+        initializeWindow(gameWindow, WIDTH, HEIGHT, "Zasada");
+        runGameLoop(gameWindow, mission);
+    }
+    return 0;
+}

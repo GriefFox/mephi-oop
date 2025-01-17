@@ -1,0 +1,40 @@
+\doxysection{generic.\+hpp}
+\hypertarget{generic_8hpp_source}{}\label{generic_8hpp_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GENERIC\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GENERIC\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }zasada\{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keyword}{enum}\ weapon\_t\{}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ \ \ def\_weap\ =\ 0,}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ light,}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ heavy,}
+\DoxyCodeLine{00012\ \ \ \ \ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{enum}\ plane\_t\{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ def\_plane\ =\ 0,}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ fighter,}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ storm\_trooper,}
+\DoxyCodeLine{00018\ \ \ \ \ \};}
+\DoxyCodeLine{00019\ \ \ \ \ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structzasada_1_1capitan__info}{capitan\_info}}\{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ std::string\ name;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ std::string\ rank;}
+\DoxyCodeLine{00023\ \ \ \ \ \};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structzasada_1_1point}{point}}\{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ x;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ y;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structzasada_1_1point}{point}}(\textcolor{keywordtype}{double}\ \_x,\ \textcolor{keywordtype}{double}\ \_y)\ :\ x(\_x),\ y(\_y)\{\};\ }
+\DoxyCodeLine{00029\ \ \ \ \ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{double}\ calculate\_distace(\mbox{\hyperlink{structzasada_1_1point}{point}}\ from,\ \mbox{\hyperlink{structzasada_1_1point}{point}}\ to);}
+\DoxyCodeLine{00032\ \}\ \textcolor{comment}{//\ namespace\ zasada}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['name_0',['name',['../classzasada_1_1Ship.html#a7fc8e701e2aa7620dcd3e3a1924c2f8a',1,'zasada::Ship::name'],['../classzasada_1_1Weapon.html#aa11eaa4bbac0a503ccbccba07354ca03',1,'zasada::Weapon::name']]],
+  ['next_1',['next',['../structzasada_1_1Table_1_1Node.html#a76d45331bf36da05579c5a26ae8a55bc',1,'zasada::Table::Node']]],
+  ['node_2',['Node',['../structzasada_1_1Table_1_1Node.html',1,'zasada::Table&lt; Key, T, Hash, KeyEqual, Allocator &gt;::Node'],['../structzasada_1_1Table_1_1Node.html#ae7a02bf29815f029589d97303b9aa088',1,'zasada::Table::Node::Node()']]]
+];

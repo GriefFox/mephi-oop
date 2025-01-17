@@ -8,8 +8,28 @@ namespace zasada {
         : name(""), price(0), storage_size(0), current(0), in_storage(0){}
 
     // Деструктор
+
+    Ammo::Ammo(const Ammo& other)
+        : name(other.name), price(other.price), storage_size(other.storage_size),
+          current(other.current), in_storage(other.in_storage) {}
+
+    Ammo& Ammo::operator=(const Ammo& other) {
+            if (this != &other) {
+                name = other.name;
+                price = other.price;
+                storage_size = other.storage_size;
+                current = other.current;
+                in_storage = other.in_storage;
+            }
+            return *this;
+        }
+
+
     Ammo::~Ammo() {}
 
+    Ammo::Ammo(std::string _name, size_t _price, size_t _storage_size, size_t _current, size_t _in_storage):
+        name(_name), price(_price), storage_size(_storage_size), current(_current), in_storage(_in_storage) {}
+    
     // Геттер для имени
     std::string Ammo::getName() const {
         return name;
@@ -77,6 +97,7 @@ namespace zasada {
     }
 
     size_t Ammo::consume(){
+        std::lock_guard<std::mutex> lock(mtx);
         if (current == 0)
             throw std::out_of_range("Not enough ammo to reduce");
         current -= 1;

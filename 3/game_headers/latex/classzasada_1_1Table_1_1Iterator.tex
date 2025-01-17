@@ -1,0 +1,105 @@
+\doxysection{zasada\+::Table\texorpdfstring{$<$}{<} Key, T, Hash, Key\+Equal, Allocator \texorpdfstring{$>$}{>}\+::Iterator Class Reference}
+\hypertarget{classzasada_1_1Table_1_1Iterator}{}\label{classzasada_1_1Table_1_1Iterator}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator}}
+
+
+An iterator for iterating through the key-\/value pairs in the table.  
+
+
+
+
+{\ttfamily \#include $<$Table.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classzasada_1_1Table_1_1Iterator_afa00c6847427fd405f93c7633baa4412}{Iterator}} (\mbox{\hyperlink{structzasada_1_1Table_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}table, size\+\_\+t table\+Size, size\+\_\+t start\+Index=0)
+\begin{DoxyCompactList}\small\item\em Constructor for the iterator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classzasada_1_1Table_1_1Iterator_a2790ffef9428959bef54f5d5aeaee79c}{operator!=}} (const \mbox{\hyperlink{classzasada_1_1Table_1_1Iterator}{Iterator}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if two iterators are not equal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Table_1_1Iterator}{Iterator}} \& \mbox{\hyperlink{classzasada_1_1Table_1_1Iterator_ab9960901dff76a8af73a17611b2ea483}{operator++}} ()
+\begin{DoxyCompactList}\small\item\em Advances the iterator to the next element. \end{DoxyCompactList}\item 
+std\+::pair$<$ const Key, T \& $>$ \mbox{\hyperlink{classzasada_1_1Table_1_1Iterator_aef97cfcfe6023ba0c49eb277dba556c6}{operator\texorpdfstring{$\ast$}{*}}} () const
+\begin{DoxyCompactList}\small\item\em Dereferences the iterator to get the current key-\/value pair. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Key, class T, class Hash = std\+::hash$<$\+Key$>$, class Key\+Equal = std\+::equal\+\_\+to$<$\+Key$>$, class Allocator = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$\newline
+class zasada\+::\+Table$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::\+Iterator}
+An iterator for iterating through the key-\/value pairs in the table. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classzasada_1_1Table_1_1Iterator_afa00c6847427fd405f93c7633baa4412}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator}!Iterator@{Iterator}}
+\index{Iterator@{Iterator}!zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator}}
+\doxysubsubsection{\texorpdfstring{Iterator()}{Iterator()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Table_1_1Iterator_afa00c6847427fd405f93c7633baa4412} 
+template$<$class Key , class T , class Hash , class Key\+Equal , class Allocator $>$ \\
+\mbox{\hyperlink{classzasada_1_1Table}{zasada\+::\+Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::\+Iterator\+::\+Iterator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structzasada_1_1Table_1_1Node}{Node}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{table}{, }\item[{size\+\_\+t}]{table\+Size}{, }\item[{size\+\_\+t}]{start\+Index}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+
+
+Constructor for the iterator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em table} & The hash table to iterate over. \\
+\hline
+{\em table\+Size} & The number of buckets in the table. \\
+\hline
+{\em start\+Index} & The index to start the iteration from (default is 0). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classzasada_1_1Table_1_1Iterator_a2790ffef9428959bef54f5d5aeaee79c}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Table_1_1Iterator_a2790ffef9428959bef54f5d5aeaee79c} 
+template$<$class Key , class T , class Hash , class Key\+Equal , class Allocator $>$ \\
+bool \mbox{\hyperlink{classzasada_1_1Table}{zasada\+::\+Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::\+Iterator\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classzasada_1_1Table_1_1Iterator}{Iterator}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if two iterators are not equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other iterator to compare with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the iterators are not equal, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Table_1_1Iterator_aef97cfcfe6023ba0c49eb277dba556c6}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Table_1_1Iterator_aef97cfcfe6023ba0c49eb277dba556c6} 
+template$<$class Key , class T , class Hash , class Key\+Equal , class Allocator $>$ \\
+std\+::pair$<$ const Key, T \& $>$ \mbox{\hyperlink{classzasada_1_1Table}{zasada\+::\+Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::\+Iterator\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Dereferences the iterator to get the current key-\/value pair. 
+
+\begin{DoxyReturn}{Returns}
+The key-\/value pair. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Table_1_1Iterator_ab9960901dff76a8af73a17611b2ea483}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator}!operator++@{operator++}}
+\index{operator++@{operator++}!zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$::Iterator}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Table_1_1Iterator_ab9960901dff76a8af73a17611b2ea483} 
+template$<$class Key , class T , class Hash , class Key\+Equal , class Allocator $>$ \\
+\mbox{\hyperlink{classzasada_1_1Table}{Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\mbox{\hyperlink{classzasada_1_1Table_1_1Iterator_afa00c6847427fd405f93c7633baa4412}{\+::\+Iterator}} \& \mbox{\hyperlink{classzasada_1_1Table}{zasada\+::\+Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::\+Iterator\+::operator++ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Advances the iterator to the next element. 
+
+\begin{DoxyReturn}{Returns}
+A reference to the updated iterator. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Table.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,117 @@
+\doxysection{Weapon.\+hpp}
+\hypertarget{Weapon_8hpp_source}{}\label{Weapon_8hpp_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ WEAPON\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ WEAPON\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Ship.hpp"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}Plane.hpp"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}Ammo.hpp"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }zasada\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{class\ }Ship;}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{class\ }Plane;}
+\DoxyCodeLine{00015\ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}}\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ weapon\_t\ \mbox{\hyperlink{classzasada_1_1Weapon_a7f1b086ea51d6ae69056c601662ccec6}{type}}\ =\ weapon\_t::def\_weap;\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a5a5e7e4983ebd7586c8d2f6f5f29cd62}{damage}};\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ std::shared\_ptr<Ammo>\ \mbox{\hyperlink{classzasada_1_1Weapon_a4e1c65b3161502117769bc4a71b656d7}{ammo}};\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classzasada_1_1Weapon_aa11eaa4bbac0a503ccbccba07354ca03}{name}};\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classzasada_1_1Weapon_a54df7b6626e050e62d8da4a46f1ed7f7}{activity}};\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a038f85f76d90365f6ee177167c260e3c}{max\_ammo}}\ =\ 0;\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_ac515df729382521a94da9ba4b1a732f4}{range}};\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_af7658c3dc431b8c8a0bdac445ebf4a7a}{fire\_rate}};\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_aaab2e9eee17f98db66fa5f44fbb5f999}{reload\_time}};\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_aa66d901223b63c1b87f5f36aaf890fdf}{reload\_left}};\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_acd201c4d59643250bd0dfcd88491d950}{price}};\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1Weapon_aa74b9c09e9e14bd6780c3a4b7ef5277a}{Weapon}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classzasada_1_1Weapon_ac45045ef21177699c8015befe69e5c0a}{\string~Weapon}}();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1Weapon_afee4f5a629b16e7af7a68d7d4a838baa}{Weapon}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a5a5e7e4983ebd7586c8d2f6f5f29cd62}{damage}},\ std::shared\_ptr<Ammo>\ \mbox{\hyperlink{classzasada_1_1Weapon_a4e1c65b3161502117769bc4a71b656d7}{ammo}},\ std::string\ \mbox{\hyperlink{classzasada_1_1Weapon_aa11eaa4bbac0a503ccbccba07354ca03}{name}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classzasada_1_1Weapon_a54df7b6626e050e62d8da4a46f1ed7f7}{activity}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a038f85f76d90365f6ee177167c260e3c}{max\_ammo}},}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_ac515df729382521a94da9ba4b1a732f4}{range}},\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_af7658c3dc431b8c8a0bdac445ebf4a7a}{fire\_rate}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_aaab2e9eee17f98db66fa5f44fbb5f999}{reload\_time}},\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_aa66d901223b63c1b87f5f36aaf890fdf}{reload\_left}},\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_acd201c4d59643250bd0dfcd88491d950}{price}});}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Getter\ methods}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ weapon\_t\ \mbox{\hyperlink{classzasada_1_1Weapon_adce7d10d251be453e1305f70fecd44e8}{getType}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a486ec4029939894eea830a78c75efa43}{getDamage}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ std::shared\_ptr<Ammo>\ \mbox{\hyperlink{classzasada_1_1Weapon_ab1e7bb8aeafabd473c694da6c3176e25}{getAmmo}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classzasada_1_1Weapon_a84aeafda4cdda562785bcbe638c92939}{getName}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classzasada_1_1Weapon_a2233e2c2df2c8efa72fdb31b1de77830}{getActivity}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a5b052081bf0c7b9b0fdf63650025b241}{getRange}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a2aca2902383b4f50beb4adf410f9ef6b}{getMaxAmmo}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_aae88f2dc06177e8ad4e6b083e27884af}{getFireRate}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a7601ef1cb43295ae10562a4b4c471d49}{getReloadTime}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a019b2054bbc7ec52b43f3c6f64063df5}{getReloadLeft}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a02b436384093d84d1e03f84bf039ee34}{getPrice}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Setter\ methods}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}}\&\ \mbox{\hyperlink{classzasada_1_1Weapon_ac9af6062e050b1765f9abf91af04058c}{setDamage}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a5a5e7e4983ebd7586c8d2f6f5f29cd62}{damage}});}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}}\&\ \mbox{\hyperlink{classzasada_1_1Weapon_a41a7b0f211aff075f08258be8fbe0ffd}{setAmmo}}(std::shared\_ptr<Ammo>\ \mbox{\hyperlink{classzasada_1_1Weapon_a4e1c65b3161502117769bc4a71b656d7}{ammo}});}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}}\&\ \mbox{\hyperlink{classzasada_1_1Weapon_a7dc8d73afb62ada1efb493edd84e4ccf}{setName}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classzasada_1_1Weapon_aa11eaa4bbac0a503ccbccba07354ca03}{name}});}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}}\&\ \mbox{\hyperlink{classzasada_1_1Weapon_ae3c85c15a5b09d2b62d82889c340565d}{setActivity}}(\textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classzasada_1_1Weapon_a54df7b6626e050e62d8da4a46f1ed7f7}{activity}});}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}}\&\ \mbox{\hyperlink{classzasada_1_1Weapon_a95e52ec205b22fcfb216d4909a5260c3}{setRange}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_ac515df729382521a94da9ba4b1a732f4}{range}});}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}}\&\ \mbox{\hyperlink{classzasada_1_1Weapon_ad1e63ea1b9cbf896c809fc17b0cdcb52}{setFireRate}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_af7658c3dc431b8c8a0bdac445ebf4a7a}{fire\_rate}});}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}}\&\ \mbox{\hyperlink{classzasada_1_1Weapon_a34c5d04fafbf7523f60aa216b346bb36}{setReloadLeft}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_aa66d901223b63c1b87f5f36aaf890fdf}{reload\_left}});}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}}\&\ \mbox{\hyperlink{classzasada_1_1Weapon_a1e189c5e8265a8263e6d2c7603f98a05}{setPrice}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_acd201c4d59643250bd0dfcd88491d950}{price}});}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a67ad732b3d1d0e48ad05aeb81bb05a5b}{reload}}();}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classzasada_1_1Weapon_afbec59cfe023af759b9d47ad6eedb721}{tick}}();}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a49aa2d756a7c17e2905c9ef679839932}{fire}}(\textcolor{keywordtype}{double}\ distance,\ std::shared\_ptr<Plane>\ plane)\ =\ 0;}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a1bf48f218900d94620b8eff9a085ef2e}{fire}}(\textcolor{keywordtype}{double}\ distance,\ std::shared\_ptr<Ship>\ ship)\ =\ 0;}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_af8689cf899836f0accc01dac501e327d}{cost}}();}
+\DoxyCodeLine{00225\ \ \ \ \ \};}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classzasada_1_1HeavyWeapon}{HeavyWeapon}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}}\ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1HeavyWeapon_a83f148472730a50dc3efd853b233c837}{HeavyWeapon}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a5a5e7e4983ebd7586c8d2f6f5f29cd62}{damage}},\ std::shared\_ptr<Ammo>\ \mbox{\hyperlink{classzasada_1_1Weapon_a4e1c65b3161502117769bc4a71b656d7}{ammo}},\ std::string\ \mbox{\hyperlink{classzasada_1_1Weapon_aa11eaa4bbac0a503ccbccba07354ca03}{name}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classzasada_1_1Weapon_a54df7b6626e050e62d8da4a46f1ed7f7}{activity}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a038f85f76d90365f6ee177167c260e3c}{max\_ammo}},}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_ac515df729382521a94da9ba4b1a732f4}{range}},\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_af7658c3dc431b8c8a0bdac445ebf4a7a}{fire\_rate}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_aaab2e9eee17f98db66fa5f44fbb5f999}{reload\_time}},\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_aa66d901223b63c1b87f5f36aaf890fdf}{reload\_left}},\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_acd201c4d59643250bd0dfcd88491d950}{price}});}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1HeavyWeapon_a3cfbbd54367e378c04b79b57188472e4}{fire}}(\textcolor{keywordtype}{double}\ distance,\ std::shared\_ptr<Ship>\ ship)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1HeavyWeapon_aa99430ec9d0cac46ad94daa94869bb66}{fire}}(\textcolor{keywordtype}{double}\ distance,\ std::shared\_ptr<Plane>\ plane)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00267\ \ \ \ \ \};}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classzasada_1_1LightWeapon}{LightWeapon}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}}\ \{}
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classzasada_1_1LightWeapon_a65964ec657133b04aad71e5492594de3}{LightWeapon}}(\textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a5a5e7e4983ebd7586c8d2f6f5f29cd62}{damage}},\ std::shared\_ptr<Ammo>\ \mbox{\hyperlink{classzasada_1_1Weapon_a4e1c65b3161502117769bc4a71b656d7}{ammo}},\ std::string\ \mbox{\hyperlink{classzasada_1_1Weapon_aa11eaa4bbac0a503ccbccba07354ca03}{name}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classzasada_1_1Weapon_a54df7b6626e050e62d8da4a46f1ed7f7}{activity}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_a038f85f76d90365f6ee177167c260e3c}{max\_ammo}},}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_ac515df729382521a94da9ba4b1a732f4}{range}},\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_af7658c3dc431b8c8a0bdac445ebf4a7a}{fire\_rate}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_aaab2e9eee17f98db66fa5f44fbb5f999}{reload\_time}},\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_aa66d901223b63c1b87f5f36aaf890fdf}{reload\_left}},\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1Weapon_acd201c4d59643250bd0dfcd88491d950}{price}});}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1LightWeapon_a0e66a35cee0a23f6b1bdfe3bbfb808e6}{fire}}(\textcolor{keywordtype}{double}\ distance,\ std::shared\_ptr<Plane>\ plane)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classzasada_1_1LightWeapon_a12413c0e9f096320d73fc394d1ca684f}{fire}}(\textcolor{keywordtype}{double}\ distance,\ std::shared\_ptr<Ship>\ ship)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00309\ \ \ \ \ \};}
+\DoxyCodeLine{00310\ \}}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ WEAPON\_H}}
+
+\end{DoxyCode}

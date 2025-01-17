@@ -1,4 +1,5 @@
 #include "game_headers/Ship.hpp"
+#include <iostream>
 
 namespace zasada {
 
@@ -6,6 +7,14 @@ namespace zasada {
     Ship::Ship()
         : name(""), speed(0), health(0), coordinates({0, 0}), 
           finish({0, 0}), price(0) {}
+
+    Ship::Ship(std::string _name, size_t _health)
+        : name(_name), speed(0), health(_health),coordinates({0, 0}), 
+          finish({0, 0}), price(0) {}
+    
+    Ship::Ship(std::string _name, size_t _speed, size_t _health, size_t _price): 
+        name(_name), speed(_speed), health(_health),coordinates({0, 0}), 
+          finish({0, 0}), price(_price) {}
 
     Ship::~Ship() {}
 
@@ -26,7 +35,7 @@ namespace zasada {
         return health;
     }
 
-    point Ship::getCoordinates() const {
+    point Ship::getPosition() const {
         return coordinates;
     }
 
@@ -39,6 +48,11 @@ namespace zasada {
     }
 
     // setters
+    Ship& Ship::setName(const std::string& newName){
+        name = newName;
+        return *this;
+    }
+
     Ship& Ship::setCapitan(const capitan_info& newCapitan) {
         capitan = newCapitan;
         return *this;
@@ -54,7 +68,7 @@ namespace zasada {
         return *this;
     }
 
-    Ship& Ship::setCoordinates(const point& newCoordinates) {
+    Ship& Ship::setPosition(const point& newCoordinates) {
         coordinates = newCoordinates;
         return *this;
     }
@@ -75,32 +89,18 @@ namespace zasada {
         return price;
     }
 
-    void Ship::move() {
-    // Calculate the direction vector from current coordinates to the finish point
-    int dx = finish.x - coordinates.x;
-    int dy = finish.y - coordinates.y;
+    void Ship::move(point n_pos){
+        double distance = calculate_distace(n_pos, coordinates);
+        if (distance == 0)
+            return;
+        
+        double nx = (n_pos.x - coordinates.x) / distance;
+        double ny = (n_pos.y - coordinates.y) / distance;
 
-    // Calculate the distance to the finish point
-    double distance = std::sqrt(dx * dx + dy * dy);
-
-    // Normalize the direction vector
-    if (distance > 0) {
-        double nx = dx / distance;
-        double ny = dy / distance;
-
-        // Move the ship by 'speed' units in the direction of the finish point
-        coordinates.x += static_cast<int>(nx * speed);
-        coordinates.y += static_cast<int>(ny * speed);
-
-        // Ensure the ship does not overshoot the finish point
-        if ((nx > 0 && coordinates.x > finish.x) || (nx < 0 && coordinates.x < finish.x)) {
-            coordinates.x = finish.x;
-        }
-        if ((ny > 0 && coordinates.y > finish.y) || (ny < 0 && coordinates.y < finish.y)) {
-            coordinates.y = finish.y;
-        }
+        double moveDistance = std::min(static_cast<double>(speed), distance);
+        coordinates.x += nx * moveDistance;
+        coordinates.y += ny * moveDistance;
     }
-}
 
     void Ship::takeDamage(size_t damage) {
         if (health > damage) {
@@ -116,7 +116,7 @@ namespace zasada {
         weapons.clear();
     }
 
-    std::shared_ptr<Weapon> Cruiser::getWeapon(const std::string& name) const {
+    std::shared_ptr<Weapon> AWeaponShip::getWeapon(const std::string& name) const {
         auto it = weapons.find(name);
         if (it != weapons.end()) {
             return it->second;
@@ -124,7 +124,13 @@ namespace zasada {
         return nullptr; // Return nullptr if not found
     }
 
-    std::shared_ptr<Ammo> Cruiser::getAmmo(const std::string& name) const {
+    std::unordered_map<std::string, std::shared_ptr<Weapon>> AWeaponShip::getWeapons() const
+    {
+        return weapons;
+    }
+
+    std::shared_ptr<Ammo> AWeaponShip::getAmmo(const std::string &name) const
+    {
         auto it = ammo_list.find(name);
         if (it != ammo_list.end()){
             return it->second;
@@ -132,14 +138,45 @@ namespace zasada {
         return nullptr; // if not found
     }
 
-    Cruiser& Cruiser::setWeapon(std::shared_ptr<Weapon> weapon) {
+    AWeaponShip& AWeaponShip::setWeapon(std::shared_ptr<Weapon> weapon) {
         weapons[weapon->getName()] = weapon;
         return *this;
     }
 
-    Cruiser& Cruiser::setAmmo(std::shared_ptr<Ammo> newAmmo) {
+    AWeaponShip& AWeaponShip::setAmmo(std::shared_ptr<Ammo> newAmmo) {
         ammo_list[newAmmo->getName()] = newAmmo;
         return *this;
+    }
+
+    AWeaponShip& AWeaponShip::removeWeapon(const std::string& wpname){
+        auto it = weapons.find(wpname);
+        // std::cout << it->first << std::endl;
+        if (it != weapons.end()){
+            weapons.erase(it);
+        } else {
+            throw std::runtime_error("Such plane doesn't exist");
+        }
+        return *this;
+    }
+
+    void AWeaponShip::performAttack(std::shared_ptr<Weapon> weapon, double distance, std::shared_ptr<Ship> ship) {
+        std::lock_guard<std::mutex> lock(attackMutex);  // Ensure only one thread performs attack at a time on shared resources
+        weapon->fire(distance, ship);
+    }
+
+    void AWeaponShip::performAttack(std::shared_ptr<Weapon> weapon, double distance, std::shared_ptr<Plane> plane) {
+        std::lock_guard<std::mutex> lock(attackMutex);  // Ensure thread-safety
+        weapon->fire(distance, plane);
+    }
+
+    void Carrier::performFlight(std::shared_ptr<Plane> plane, double distance, std::shared_ptr<Plane> target){
+        std::lock_guard<std::mutex> lock(flightMutex);
+        plane->attack(distance, target);
+    }
+
+    void Carrier::performFlight(std::shared_ptr<Plane> plane, double distance, std::shared_ptr<Ship> target){
+        std::lock_guard<std::mutex> lock(flightMutex);
+        plane->attack(distance, target);
     }
 
     size_t Cruiser::getSpace() const {
@@ -163,22 +200,38 @@ namespace zasada {
         weap->reload();
     }
 
-    void Cruiser::attack(std::string& weaponName, std::shared_ptr<Plane> plane) {
+    std::thread Cruiser::attack(std::string& weaponName, std::shared_ptr<Plane> plane) {
         std::shared_ptr<Weapon> weapon = this->getWeapon(weaponName);
         if (!weapon) {
             throw std::runtime_error("Weapon not found");
         }
+        double distance = calculate_distace(this->getPosition(), plane->getPosition());
+        weapon->fire(distance, plane);
+        std::thread attackThread([this, weapon, distance, plane] {
+            performAttack(weapon, distance, plane);
+        });
 
-        weapon->fire(this, plane);
+        // attackThread.detach(); 
+        return attackThread;
     }
 
-    void Cruiser::attack(std::string& weaponName, std::shared_ptr<Ship> ship){
+    std::thread Cruiser::attack(std::string& weaponName, std::shared_ptr<Ship> ship){
         std::shared_ptr<Weapon> weapon = this->getWeapon(weaponName);
         if (!weapon) {
             throw std::runtime_error("Weapon not found");
         }
+        double distance = calculate_distace(this->getPosition(), ship->getPosition());
 
-        weapon->fire(this, ship);
+        std::lock_guard<std::mutex> lock(attackMutex);
+
+        // std::thread attackThread(performAttack, weapon, distance, ship);
+        std::thread attackThread([this, weapon, distance, ship] {
+            performAttack(weapon, distance, ship);
+        });
+
+        // attackThread.detach(); 
+        weapon->fire(distance, ship);
+        return attackThread;
     }
 
     size_t Cruiser::cost() {
@@ -190,7 +243,7 @@ namespace zasada {
     }
 
     // Реализация Carrier
-    std::shared_ptr<Plane> Carrier::getPlane(std::string& name) const {
+    std::shared_ptr<Plane> Carrier::getPlane(const std::string& name) const {
         auto it = planes.find(name);
         if (it != planes.end()){
             return it->second;
@@ -198,8 +251,23 @@ namespace zasada {
         return nullptr;
     }
 
+    std::unordered_map<std::string, std::shared_ptr<Plane>> Carrier::getPlanes() const {
+        return planes;
+    }
+
     Carrier& Carrier::setPlane(std::shared_ptr<Plane> plane) {
         planes[plane->getName()] = plane;
+        return *this;
+    }
+
+    Carrier& Carrier::erasePlane(const std::string& plname){
+        auto it = planes.find(plname);
+        // std::cout << it->first << std::endl;
+        if (it != planes.end()){
+            planes.erase(it);
+        } else {
+            throw std::runtime_error("Such plane doesn't exist");
+        }
         return *this;
     }
 
@@ -208,8 +276,14 @@ namespace zasada {
         if (!plane) {
             throw std::runtime_error("Plane not found");
         }
+        double distance = calculate_distace(this->getPosition(), ship->getPosition());
+        // plane->attack(distance, ship);
 
-        plane->attack(this, ship);
+        std::thread flightThread([this, plane, distance, ship] {
+        // Perform the flight operation (attack) on the target plane
+            performFlight(plane, distance, ship);
+        });
+        flightThread.detach();
     }
 
     void Carrier::flight(std::string& plane_name, std::shared_ptr<Plane> target_plane) {
@@ -217,8 +291,13 @@ namespace zasada {
         if (!plane) {
             throw std::runtime_error("Plane not found");
         }
-
-        plane->attack(this, target_plane);
+        double distance = calculate_distace(this->getPosition(), target_plane->getPosition());
+        // plane->attack(distance, target_plane);
+        std::thread flightThread([this, plane, distance, target_plane] {
+            // Perform the flight operation (attack) on the target plane
+            performFlight(plane, distance, target_plane);
+        });
+        flightThread.detach();
     }
 
     size_t Carrier::cost(){
@@ -239,12 +318,31 @@ namespace zasada {
     }
 
     size_t AttackCarrier::cost(){
-        size_t totalCost = Cruiser::cost();
+        size_t totalCost = Carrier::cost();
 
-        for (const auto& [_, plane] : planes) {
-            totalCost += plane->cost();
+        for (const auto& [_, weapon] : weapons) {
+            totalCost += weapon->cost();
         }
+        
         return totalCost;
+    }
+
+    std::thread AttackCarrier::attack(std::string& weaponName, std::shared_ptr<Plane> plane) {
+        std::shared_ptr<Weapon> weapon = this->getWeapon(weaponName);
+        if (!weapon) {
+            throw std::runtime_error("Weapon not found");
+        }
+        double distance = calculate_distace(this->getPosition(), plane->getPosition());
+        weapon->fire(distance, plane);
+    }
+
+    std::thread AttackCarrier::attack(std::string& weaponName, std::shared_ptr<Ship> ship){
+        std::shared_ptr<Weapon> weapon = this->getWeapon(weaponName);
+        if (!weapon) {
+            throw std::runtime_error("Weapon not found");
+        }
+        double distance = calculate_distace(this->getPosition(), ship->getPosition());
+        weapon->fire(distance, ship);
     }
 
 } // namespace zasada

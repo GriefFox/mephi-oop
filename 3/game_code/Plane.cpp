@@ -1,12 +1,32 @@
 #include "game_headers/Plane.hpp"
+#include "game_headers/generic.hpp"
 #include <memory>
+#include <thread>
+#include <mutex>
 
 namespace zasada {
 
     Plane::Plane()
         : damage(0), activity(false), health(0), speed(0), fuel_capacity(0),
         fuel_cons(0), refill_fuel(0), position(point(0,0)), price(0), range(0) {}
-
+    Plane::Plane(size_t _damage, bool _activity, size_t _health, size_t _speed,
+          const std::string& _name, std::shared_ptr<Ammo> _ammo, size_t _max_ammo,
+          size_t _fuel_capacity, size_t _fuel_current, size_t _fuel_cons,
+          size_t _refill_fuel, point _position, size_t _price, size_t _range): damage(_damage),
+          activity(_activity),
+          health(_health),
+          speed(_speed),
+          name(_name),
+          ammo(_ammo),
+          max_ammo(_max_ammo),
+          fuel_capacity(_fuel_capacity),
+          fuel_current(_fuel_current),
+          fuel_cons(_fuel_cons),
+          refill_fuel(_refill_fuel),
+          position(_position),
+          price(_price),
+          range(_range) {}
+          
     Plane::~Plane() {}
 
     // getters
@@ -36,6 +56,10 @@ namespace zasada {
 
     size_t Plane::getMaxAmmo() const{
         return max_ammo;
+    }
+
+    size_t Plane::getFuelCurrent() const{
+        return fuel_current;
     }
 
     size_t Plane::getFuelCapacity() const{
@@ -102,6 +126,11 @@ namespace zasada {
         return *this;
     }
 
+    Plane& Plane::setFuelCurrent(size_t cur){
+        fuel_current = cur;
+        return *this;
+    }
+
     Plane& Plane::setFuelCapacity(size_t capacity) {
         fuel_capacity = capacity;
         return *this;
@@ -118,6 +147,28 @@ namespace zasada {
     }
 
     Plane& Plane::moveTo(point n_pos){
+        double distance = calculate_distace(n_pos, position);
+        if (distance == 0)
+            return *this;
+
+        double nx = (n_pos.x - position.x) / distance;
+        double ny = (n_pos.y - position.y) / distance;
+
+        double moveDistance = std::min(static_cast<double>(speed), distance);
+        position.x += nx * moveDistance;
+        position.y += ny * moveDistance;
+
+        return *this;
+    }
+
+    void Plane::moveToAsync(point n_pos) {
+            std::thread([this, n_pos]() {
+                std::lock_guard<std::mutex> lock(mtx);
+                this->moveTo(n_pos);
+            }).detach();  // Detach thread to run independently
+        }
+
+    Plane& Plane::setPosition(point n_pos){
         position = n_pos;
         return *this;
     }
@@ -142,26 +193,37 @@ namespace zasada {
         return *this;
     }
 
-    size_t Plane::attack(const Ship*, std::shared_ptr<Plane>){
+    size_t Plane::attack(double distance, std::shared_ptr<Plane>){
         throw std::runtime_error("This plane cannot attack planes");
     }
 
-    size_t Plane::attack(const Ship*, std::shared_ptr<Ship>){
+    void Plane::attackAsync(double distance, std::shared_ptr<Plane> target) {
+            std::thread([this, distance, target]() {
+                std::lock_guard<std::mutex> lock(mtx);
+                this->attack(distance, target);
+            }).detach();  // Detach thread to run independently
+        }
+
+    size_t Plane::attack(double distance, std::shared_ptr<Ship>){
         throw std::runtime_error("This plane cannot attack ships");
     }
 
+    void Plane::attackAsync(double distance, std::shared_ptr<Ship> target) {
+            std::thread([this, distance, target]() {
+                std::lock_guard<std::mutex> lock(mtx);
+                this->attack(distance, target);
+            }).detach();  // Detach thread to run independently
+        }
+
     size_t Plane::cost(){
-        return price + ammo->cost();
+        return price;
     }
 
     //* Fighter
-    size_t Fighter::attack(const Ship* from, std::shared_ptr<Plane> to) {
+    size_t Fighter::attack(double distance, std::shared_ptr<Plane> to) {
         if (!activity || (ammo->getCurrent() == 0))
-            return 0;
-        point fromPosition = from->getCoordinates();
-        point toPosition = to->getPosition();
-        double distance = calculate_distace(fromPosition, toPosition);
-
+            throw std::runtime_error("unactive plane can't fly");
+        
         // Check if the target is within range
         if (distance > range) {
             return 0; // Target is out of range
@@ -179,12 +241,10 @@ namespace zasada {
     }
 
     //* StormTrooper
-    size_t StormTrooper::attack(const Ship* from, std::shared_ptr<Ship> to) {
+    
+    size_t StormTrooper::attack(double distance, std::shared_ptr<Ship> to) {
         if (!activity || (ammo->getCurrent() == 0))
             return 0;
-        point fromPosition = from->getCoordinates();
-        point toPosition = to->getCoordinates();
-        double distance = calculate_distace(fromPosition, toPosition);
 
         // Check if the target is within range
         if (distance > range) {
@@ -202,4 +262,21 @@ namespace zasada {
         return consumed;
     }
 
+    Fighter::Fighter(size_t _damage, bool _activity, size_t _health, size_t _speed,
+                     const std::string& _name, std::shared_ptr<Ammo> _ammo, size_t _max_ammo,
+                     size_t _fuel_capacity, size_t _fuel_current, size_t _fuel_cons,
+                     size_t _refill_fuel, point _position, size_t _price, size_t _range)
+        : Plane(_damage, _activity, _health, _speed, _name, _ammo, _max_ammo,
+                _fuel_capacity, _fuel_current, _fuel_cons, _refill_fuel, _position, _price, _range) {
+        // Additional initialization for Fighter, if needed
+    }
+
+    StormTrooper::StormTrooper(size_t _damage, bool _activity, size_t _health, size_t _speed,
+                               const std::string& _name, std::shared_ptr<Ammo> _ammo, size_t _max_ammo,
+                               size_t _fuel_capacity, size_t _fuel_current, size_t _fuel_cons,
+                               size_t _refill_fuel, point _position, size_t _price, size_t _range)
+        : Plane(_damage, _activity, _health, _speed, _name, _ammo, _max_ammo,
+                _fuel_capacity, _fuel_current, _fuel_cons, _refill_fuel, _position, _price, _range) {
+        // Additional initialization for StormTrooper, if needed
+    }
 } // namespace zasada

@@ -1,0 +1,4 @@
+/home/grieffox/Zasada/build/CMakeFiles/Zasada.dir
+/home/grieffox/Zasada/build/CMakeFiles/run.dir
+/home/grieffox/Zasada/build/CMakeFiles/edit_cache.dir
+/home/grieffox/Zasada/build/CMakeFiles/rebuild_cache.dir

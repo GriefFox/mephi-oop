@@ -1,0 +1,190 @@
+\doxysection{zasada\+::Table\texorpdfstring{$<$}{<} Key, T, Hash, Key\+Equal, Allocator \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classzasada_1_1Table}{}\label{classzasada_1_1Table}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}}
+
+
+A template class implementing a hash table with separate chaining for key-\/value pairs.  
+
+
+
+
+{\ttfamily \#include $<$Table.\+hpp$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classzasada_1_1Table_1_1Iterator}{Iterator}}
+\begin{DoxyCompactList}\small\item\em An iterator for iterating through the key-\/value pairs in the table. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structzasada_1_1Table_1_1Node}{Node}}
+\begin{DoxyCompactList}\small\item\em A structure representing a node in the hash table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classzasada_1_1Table_a10c50253c48dbdad94634b444f1e20e5}{Table}} (size\+\_\+t capacity=26)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classzasada_1_1Table}{Table} with the given capacity. \end{DoxyCompactList}\item 
+\Hypertarget{classzasada_1_1Table_aec4ff3f8b340b8e11e1b96e10a53264e}\label{classzasada_1_1Table_aec4ff3f8b340b8e11e1b96e10a53264e} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Table} ()
+\begin{DoxyCompactList}\small\item\em Destructor that frees all dynamically allocated memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Table_a59593ac2e1f10b60d1d2051f09dacaad}{insert}} (const Key \&key, const T \&value)
+\begin{DoxyCompactList}\small\item\em Inserts a key-\/value pair into the table. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classzasada_1_1Table_a3ffe733828fb2360dd605013c5141952}{erase}} (const Key \&key)
+\begin{DoxyCompactList}\small\item\em Erases a key-\/value pair from the table. \end{DoxyCompactList}\item 
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classzasada_1_1Table_a6d4035726b9b8d1ae685e2016ef50191}{find}} (const Key \&key)
+\begin{DoxyCompactList}\small\item\em Finds the value associated with a given key. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classzasada_1_1Table_aa6d44c683f7c0328737f90c13c16f655}{size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of key-\/value pairs in the table. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Table_1_1Iterator}{Iterator}} \mbox{\hyperlink{classzasada_1_1Table_a493ba440b92df9eadb0243d9120d81c7}{begin}} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator to the first key-\/value pair in the table. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Table_1_1Iterator}{Iterator}} \mbox{\hyperlink{classzasada_1_1Table_a714ad86787bf5458eaba02ccfd574727}{end}} ()
+\begin{DoxyCompactList}\small\item\em Returns an iterator to one past the last key-\/value pair in the table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Key, class T, class Hash = std\+::hash$<$\+Key$>$, class Key\+Equal = std\+::equal\+\_\+to$<$\+Key$>$, class Allocator = std\+::allocator$<$std\+::pair$<$const Key, T$>$$>$$>$\newline
+class zasada\+::\+Table$<$ Key, T, Hash, Key\+Equal, Allocator $>$}
+A template class implementing a hash table with separate chaining for key-\/value pairs. 
+
+This class provides basic functionality for inserting, erasing, finding, and iterating through key-\/value pairs stored in a hash table.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Key} & Type of the key used in the table. \\
+\hline
+{\em T} & Type of the value associated with the key. \\
+\hline
+{\em Hash} & Hash function used to hash the keys. \\
+\hline
+{\em Key\+Equal} & Function to compare the keys for equality. \\
+\hline
+{\em Allocator} & Allocator used for memory management. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classzasada_1_1Table_a10c50253c48dbdad94634b444f1e20e5}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}!Table@{Table}}
+\index{Table@{Table}!zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{Table()}{Table()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Table_a10c50253c48dbdad94634b444f1e20e5} 
+template$<$class Key , class T , class Hash , class Key\+Equal , class Allocator $>$ \\
+\mbox{\hyperlink{classzasada_1_1Table}{zasada\+::\+Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::\+Table (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{capacity}{ = {\ttfamily 26}}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classzasada_1_1Table}{Table} with the given capacity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & The initial capacity of the table. Default is 26. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classzasada_1_1Table_a493ba440b92df9eadb0243d9120d81c7}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}!begin@{begin}}
+\index{begin@{begin}!zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Table_a493ba440b92df9eadb0243d9120d81c7} 
+template$<$class Key , class T , class Hash , class Key\+Equal , class Allocator $>$ \\
+\mbox{\hyperlink{classzasada_1_1Table}{Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::\+Iterator \mbox{\hyperlink{classzasada_1_1Table}{zasada\+::\+Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns an iterator to the first key-\/value pair in the table. 
+
+\begin{DoxyReturn}{Returns}
+An iterator to the first element. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Table_a714ad86787bf5458eaba02ccfd574727}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}!end@{end}}
+\index{end@{end}!zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Table_a714ad86787bf5458eaba02ccfd574727} 
+template$<$class Key , class T , class Hash , class Key\+Equal , class Allocator $>$ \\
+\mbox{\hyperlink{classzasada_1_1Table}{Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::\+Iterator \mbox{\hyperlink{classzasada_1_1Table}{zasada\+::\+Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns an iterator to one past the last key-\/value pair in the table. 
+
+\begin{DoxyReturn}{Returns}
+An iterator to the end. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Table_a3ffe733828fb2360dd605013c5141952}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}!erase@{erase}}
+\index{erase@{erase}!zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{erase()}{erase()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Table_a3ffe733828fb2360dd605013c5141952} 
+template$<$class Key , class T , class Hash , class Key\+Equal , class Allocator $>$ \\
+bool \mbox{\hyperlink{classzasada_1_1Table}{zasada\+::\+Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::erase (\begin{DoxyParamCaption}\item[{const Key \&}]{key}{}\end{DoxyParamCaption})}
+
+
+
+Erases a key-\/value pair from the table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to erase. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key was found and erased, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Table_a6d4035726b9b8d1ae685e2016ef50191}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}!find@{find}}
+\index{find@{find}!zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Table_a6d4035726b9b8d1ae685e2016ef50191} 
+template$<$class Key , class T , class Hash , class Key\+Equal , class Allocator $>$ \\
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classzasada_1_1Table}{zasada\+::\+Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::find (\begin{DoxyParamCaption}\item[{const Key \&}]{key}{}\end{DoxyParamCaption})}
+
+
+
+Finds the value associated with a given key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to search for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the value associated with the key, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Table_a59593ac2e1f10b60d1d2051f09dacaad}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}!insert@{insert}}
+\index{insert@{insert}!zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Table_a59593ac2e1f10b60d1d2051f09dacaad} 
+template$<$class Key , class T , class Hash , class Key\+Equal , class Allocator $>$ \\
+void \mbox{\hyperlink{classzasada_1_1Table}{zasada\+::\+Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::insert (\begin{DoxyParamCaption}\item[{const Key \&}]{key}{, }\item[{const T \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Inserts a key-\/value pair into the table. 
+
+Throws an exception if the key already exists in the table. 
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to insert. \\
+\hline
+{\em value} & The value to associate with the key. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if the key already exists. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classzasada_1_1Table_aa6d44c683f7c0328737f90c13c16f655}\index{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}!size@{size}}
+\index{size@{size}!zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$@{zasada::Table$<$ Key, T, Hash, KeyEqual, Allocator $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Table_aa6d44c683f7c0328737f90c13c16f655} 
+template$<$class Key , class T , class Hash , class Key\+Equal , class Allocator $>$ \\
+size\+\_\+t \mbox{\hyperlink{classzasada_1_1Table}{zasada\+::\+Table}}$<$ Key, T, Hash, Key\+Equal, Allocator $>$\+::size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of key-\/value pairs in the table. 
+
+\begin{DoxyReturn}{Returns}
+The size of the table. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Table.\+hpp\end{DoxyCompactItemize}

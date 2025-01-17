@@ -1,0 +1,565 @@
+\doxysection{zasada\+::Mission Class Reference}
+\hypertarget{classzasada_1_1Mission}{}\label{classzasada_1_1Mission}\index{zasada::Mission@{zasada::Mission}}
+
+
+Represents a mission with attackers, defenders, and various mission-\/related parameters.  
+
+
+
+
+{\ttfamily \#include $<$Mission.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classzasada_1_1Mission_a7ad024a690212bc1257ef00dd38bd753}\label{classzasada_1_1Mission_a7ad024a690212bc1257ef00dd38bd753} 
+{\bfseries Mission} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{classzasada_1_1Mission}{Mission}. \end{DoxyCompactList}\item 
+\Hypertarget{classzasada_1_1Mission_a283cd69cb2af61abf5c55a783c69f047}\label{classzasada_1_1Mission_a283cd69cb2af61abf5c55a783c69f047} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Mission} ()
+\begin{DoxyCompactList}\small\item\em Destructor for \doxylink{classzasada_1_1Mission}{Mission}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Table}{Table}}$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classzasada_1_1Ship}{Ship}} $>$ $>$ \& \mbox{\hyperlink{classzasada_1_1Mission_a012877506c353beccd9cc35c57a6769e}{get\+Table\+Attacker}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the table of attacker ships. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Table}{Table}}$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classzasada_1_1Ship}{Ship}} $>$ $>$ \& \mbox{\hyperlink{classzasada_1_1Mission_a22924873f1e3ed5cde5c5039297d8b27}{get\+Table\+Defender}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the table of defender ships. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structzasada_1_1capitan__info}{capitan\+\_\+info}} \mbox{\hyperlink{classzasada_1_1Mission_a22d27cd0ec857d9b16fd0e2ce20e4401}{get\+Commander}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the mission commander\textquotesingle{}s information. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classzasada_1_1Mission_af379f858f26f20131620ed4354f8ded8}{get\+Max\+Ships}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the maximum number of ships allowed. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classzasada_1_1Mission_a5eda20d84b9b0b8986b9310159fdbabc}{get\+Spend}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the amount of money spent. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classzasada_1_1Mission_a94185c94f2c1325e85f26953cda76275}{get\+Max\+Spend}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the maximum amount of money allowed to spend. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classzasada_1_1Mission_a0150b1290a67af34ad2ab7fc8c6b33e1}{get\+Damage\+Attacker}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the total damage dealt by attackers. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classzasada_1_1Mission_a04e39cd4bb57cc32ea56c847630b5158}{get\+Damage\+Defender}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the total damage dealt by defenders. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classzasada_1_1Mission_a89f880cec29489c8b998ef6dd134340f}{get\+Win\+Price}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the required damage for victory. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classzasada_1_1Mission_aa7967f47f34dfe77229621996c5715e1}{get\+Enemy\+Price}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the cost of the enemy fleet. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classzasada_1_1Mission_a3cc96205571775c7aa75aab35f5957a8}{get\+Saved\+Money}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the value of saved units. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structzasada_1_1point}{point}} \mbox{\hyperlink{classzasada_1_1Mission_a8c1ee6f44a6e7d4a0efa255ca388d2a9}{get\+PointA}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the starting point of the mission. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structzasada_1_1point}{point}} \mbox{\hyperlink{classzasada_1_1Mission_a818a5cc0e8b7894e9141d17a3a89942d}{get\+PointB}} () const
+\begin{DoxyCompactList}\small\item\em Retrieves the ending point of the mission. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Mission_aae182621d1aa40738bb760cdd890134a}{set\+Commander}} (const \mbox{\hyperlink{structzasada_1_1capitan__info}{capitan\+\_\+info}} \&commander)
+\begin{DoxyCompactList}\small\item\em Sets the mission commander. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Mission_a54aee0e1aa146f175902b10831fe565f}{set\+Max\+Ships}} (size\+\_\+t max\+Ships)
+\begin{DoxyCompactList}\small\item\em Sets the maximum number of ships. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Mission_abb20c449c816fcc969bcb908ff736c5b}{set\+Spend}} (size\+\_\+t spend)
+\begin{DoxyCompactList}\small\item\em Sets the amount of money spent. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Mission_afaab2b82d678400bdd301ff56721b659}{set\+Max\+Spend}} (size\+\_\+t max\+Spend)
+\begin{DoxyCompactList}\small\item\em Sets the maximum allowed spending. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Mission_a01a709bbb5b5814671fe339f8989f7a5}{set\+Damage\+Attacker}} (size\+\_\+t damage)
+\begin{DoxyCompactList}\small\item\em Sets the damage dealt by attackers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Mission_a726d8a6664b1b621a26c84c60d003036}{set\+Damage\+Defender}} (size\+\_\+t damage)
+\begin{DoxyCompactList}\small\item\em Sets the damage dealt by defenders. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Mission_ab37f6950f30bacf0dae3fbaf2731e873}{set\+Win\+Price}} (size\+\_\+t price)
+\begin{DoxyCompactList}\small\item\em Sets the required damage for victory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Mission_ab9567875dcb1a9edb9480ecea307c082}{set\+Enemy\+Price}} (size\+\_\+t price)
+\begin{DoxyCompactList}\small\item\em Sets the cost of the enemy fleet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Mission_a2be82b033fdfcf95393c639698c9ddeb}{set\+Saved\+Money}} (size\+\_\+t money)
+\begin{DoxyCompactList}\small\item\em Sets the value of saved units. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Mission_a543693be35fba1ad8617288abcf7b8cc}{set\+PointA}} (const \mbox{\hyperlink{structzasada_1_1point}{point}} \&pointA)
+\begin{DoxyCompactList}\small\item\em Sets the starting point of the mission. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classzasada_1_1Mission_a7e785b97c09910bee252091eeed82b6c}{set\+PointB}} (const \mbox{\hyperlink{structzasada_1_1point}{point}} \&pointB)
+\begin{DoxyCompactList}\small\item\em Sets the ending point of the mission. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& \mbox{\hyperlink{classzasada_1_1Mission_a4f1bebade3ecddb1059490a1d825db23}{buy\+Ship}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classzasada_1_1Ship}{Ship}} $>$ ship)
+\begin{DoxyCompactList}\small\item\em Buys a ship for the mission. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& \mbox{\hyperlink{classzasada_1_1Mission_a4f4ed3457f07e5559cb3a4556e56f74b}{sell\+Ship}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Sells a ship from the mission. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& \mbox{\hyperlink{classzasada_1_1Mission_a1de6fa52a6a82b0d46cae8e5474c3211}{buy\+Plane}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classzasada_1_1Plane}{Plane}} $>$ plane, std\+::string \&ship\+Name)
+\begin{DoxyCompactList}\small\item\em Buys a plane and assigns it to a ship. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& \mbox{\hyperlink{classzasada_1_1Mission_a3cabf59d62dbd5a255257ff08cb4a0d0}{sell\+Plane}} (const std\+::string \&plane\+\_\+name, const std\+::string \&ship\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Sells a plane from a ship. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& \mbox{\hyperlink{classzasada_1_1Mission_aada0a2e9e05285537bed0a94cfa42699}{move\+Plane}} (const std\+::string \&source\+Ship\+Name, const std\+::string \&plane\+Name, const std\+::string \&destination\+Ship\+Name)
+\begin{DoxyCompactList}\small\item\em Moves a plane from one ship to another. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& \mbox{\hyperlink{classzasada_1_1Mission_ab66a1a8a59bd22c11ff35e637fe59936}{buy\+Weapon}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}} $>$ weapon, std\+::string \&ship\+Name)
+\begin{DoxyCompactList}\small\item\em Buys a weapon and assigns it to a ship. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& \mbox{\hyperlink{classzasada_1_1Mission_aaa4ba5fb6a3b3756df5d3ad5f91aaef6}{sell\+Weapon}} (const std\+::string \&weapon\+\_\+name, const std\+::string \&ship\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Sells a weapon from a ship. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a mission with attackers, defenders, and various mission-\/related parameters. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classzasada_1_1Mission_a1de6fa52a6a82b0d46cae8e5474c3211}\index{zasada::Mission@{zasada::Mission}!buyPlane@{buyPlane}}
+\index{buyPlane@{buyPlane}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{buyPlane()}{buyPlane()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a1de6fa52a6a82b0d46cae8e5474c3211} 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& zasada\+::\+Mission\+::buy\+Plane (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classzasada_1_1Plane}{Plane}} $>$}]{plane}{, }\item[{std\+::string \&}]{ship\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Buys a plane and assigns it to a ship. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em plane} & The plane to add. \\
+\hline
+{\em ship\+Name} & The name of the ship to assign the plane to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the current \doxylink{classzasada_1_1Mission}{Mission} object. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a4f1bebade3ecddb1059490a1d825db23}\index{zasada::Mission@{zasada::Mission}!buyShip@{buyShip}}
+\index{buyShip@{buyShip}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{buyShip()}{buyShip()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a4f1bebade3ecddb1059490a1d825db23} 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& zasada\+::\+Mission\+::buy\+Ship (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classzasada_1_1Ship}{Ship}} $>$}]{ship}{}\end{DoxyParamCaption})}
+
+
+
+Buys a ship for the mission. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ship} & The ship to add to the mission. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the current \doxylink{classzasada_1_1Mission}{Mission} object. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_ab66a1a8a59bd22c11ff35e637fe59936}\index{zasada::Mission@{zasada::Mission}!buyWeapon@{buyWeapon}}
+\index{buyWeapon@{buyWeapon}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{buyWeapon()}{buyWeapon()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_ab66a1a8a59bd22c11ff35e637fe59936} 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& zasada\+::\+Mission\+::buy\+Weapon (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classzasada_1_1Weapon}{Weapon}} $>$}]{weapon}{, }\item[{std\+::string \&}]{ship\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Buys a weapon and assigns it to a ship. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em weapon} & The weapon to buy. \\
+\hline
+{\em ship\+Name} & The name of the ship to assign the weapon to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the current \doxylink{classzasada_1_1Mission}{Mission} object. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a22d27cd0ec857d9b16fd0e2ce20e4401}\index{zasada::Mission@{zasada::Mission}!getCommander@{getCommander}}
+\index{getCommander@{getCommander}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getCommander()}{getCommander()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a22d27cd0ec857d9b16fd0e2ce20e4401} 
+\mbox{\hyperlink{structzasada_1_1capitan__info}{capitan\+\_\+info}} zasada\+::\+Mission\+::get\+Commander (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the mission commander\textquotesingle{}s information. 
+
+\begin{DoxyReturn}{Returns}
+The mission commander information. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a0150b1290a67af34ad2ab7fc8c6b33e1}\index{zasada::Mission@{zasada::Mission}!getDamageAttacker@{getDamageAttacker}}
+\index{getDamageAttacker@{getDamageAttacker}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getDamageAttacker()}{getDamageAttacker()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a0150b1290a67af34ad2ab7fc8c6b33e1} 
+size\+\_\+t zasada\+::\+Mission\+::get\+Damage\+Attacker (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the total damage dealt by attackers. 
+
+\begin{DoxyReturn}{Returns}
+Total attacker damage. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a04e39cd4bb57cc32ea56c847630b5158}\index{zasada::Mission@{zasada::Mission}!getDamageDefender@{getDamageDefender}}
+\index{getDamageDefender@{getDamageDefender}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getDamageDefender()}{getDamageDefender()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a04e39cd4bb57cc32ea56c847630b5158} 
+size\+\_\+t zasada\+::\+Mission\+::get\+Damage\+Defender (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the total damage dealt by defenders. 
+
+\begin{DoxyReturn}{Returns}
+Total defender damage. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_aa7967f47f34dfe77229621996c5715e1}\index{zasada::Mission@{zasada::Mission}!getEnemyPrice@{getEnemyPrice}}
+\index{getEnemyPrice@{getEnemyPrice}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getEnemyPrice()}{getEnemyPrice()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_aa7967f47f34dfe77229621996c5715e1} 
+size\+\_\+t zasada\+::\+Mission\+::get\+Enemy\+Price (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the cost of the enemy fleet. 
+
+\begin{DoxyReturn}{Returns}
+Enemy fleet cost. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_af379f858f26f20131620ed4354f8ded8}\index{zasada::Mission@{zasada::Mission}!getMaxShips@{getMaxShips}}
+\index{getMaxShips@{getMaxShips}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getMaxShips()}{getMaxShips()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_af379f858f26f20131620ed4354f8ded8} 
+size\+\_\+t zasada\+::\+Mission\+::get\+Max\+Ships (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the maximum number of ships allowed. 
+
+\begin{DoxyReturn}{Returns}
+Maximum number of ships. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a94185c94f2c1325e85f26953cda76275}\index{zasada::Mission@{zasada::Mission}!getMaxSpend@{getMaxSpend}}
+\index{getMaxSpend@{getMaxSpend}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getMaxSpend()}{getMaxSpend()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a94185c94f2c1325e85f26953cda76275} 
+size\+\_\+t zasada\+::\+Mission\+::get\+Max\+Spend (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the maximum amount of money allowed to spend. 
+
+\begin{DoxyReturn}{Returns}
+Maximum allowed spending. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a8c1ee6f44a6e7d4a0efa255ca388d2a9}\index{zasada::Mission@{zasada::Mission}!getPointA@{getPointA}}
+\index{getPointA@{getPointA}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getPointA()}{getPointA()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a8c1ee6f44a6e7d4a0efa255ca388d2a9} 
+\mbox{\hyperlink{structzasada_1_1point}{point}} zasada\+::\+Mission\+::get\+PointA (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the starting point of the mission. 
+
+\begin{DoxyReturn}{Returns}
+Starting point. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a818a5cc0e8b7894e9141d17a3a89942d}\index{zasada::Mission@{zasada::Mission}!getPointB@{getPointB}}
+\index{getPointB@{getPointB}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getPointB()}{getPointB()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a818a5cc0e8b7894e9141d17a3a89942d} 
+\mbox{\hyperlink{structzasada_1_1point}{point}} zasada\+::\+Mission\+::get\+PointB (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the ending point of the mission. 
+
+\begin{DoxyReturn}{Returns}
+Ending point. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a3cc96205571775c7aa75aab35f5957a8}\index{zasada::Mission@{zasada::Mission}!getSavedMoney@{getSavedMoney}}
+\index{getSavedMoney@{getSavedMoney}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getSavedMoney()}{getSavedMoney()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a3cc96205571775c7aa75aab35f5957a8} 
+size\+\_\+t zasada\+::\+Mission\+::get\+Saved\+Money (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the value of saved units. 
+
+\begin{DoxyReturn}{Returns}
+Saved units\textquotesingle{} value. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a5eda20d84b9b0b8986b9310159fdbabc}\index{zasada::Mission@{zasada::Mission}!getSpend@{getSpend}}
+\index{getSpend@{getSpend}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getSpend()}{getSpend()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a5eda20d84b9b0b8986b9310159fdbabc} 
+size\+\_\+t zasada\+::\+Mission\+::get\+Spend (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the amount of money spent. 
+
+\begin{DoxyReturn}{Returns}
+Amount of money spent. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a012877506c353beccd9cc35c57a6769e}\index{zasada::Mission@{zasada::Mission}!getTableAttacker@{getTableAttacker}}
+\index{getTableAttacker@{getTableAttacker}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getTableAttacker()}{getTableAttacker()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a012877506c353beccd9cc35c57a6769e} 
+\mbox{\hyperlink{classzasada_1_1Table}{Table}}$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classzasada_1_1Ship}{Ship}} $>$ $>$ \& zasada\+::\+Mission\+::get\+Table\+Attacker (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the table of attacker ships. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the table of attacker ships. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a22924873f1e3ed5cde5c5039297d8b27}\index{zasada::Mission@{zasada::Mission}!getTableDefender@{getTableDefender}}
+\index{getTableDefender@{getTableDefender}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getTableDefender()}{getTableDefender()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a22924873f1e3ed5cde5c5039297d8b27} 
+\mbox{\hyperlink{classzasada_1_1Table}{Table}}$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classzasada_1_1Ship}{Ship}} $>$ $>$ \& zasada\+::\+Mission\+::get\+Table\+Defender (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the table of defender ships. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the table of defender ships. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a89f880cec29489c8b998ef6dd134340f}\index{zasada::Mission@{zasada::Mission}!getWinPrice@{getWinPrice}}
+\index{getWinPrice@{getWinPrice}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{getWinPrice()}{getWinPrice()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a89f880cec29489c8b998ef6dd134340f} 
+size\+\_\+t zasada\+::\+Mission\+::get\+Win\+Price (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Retrieves the required damage for victory. 
+
+\begin{DoxyReturn}{Returns}
+Damage required for victory. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_aada0a2e9e05285537bed0a94cfa42699}\index{zasada::Mission@{zasada::Mission}!movePlane@{movePlane}}
+\index{movePlane@{movePlane}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{movePlane()}{movePlane()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_aada0a2e9e05285537bed0a94cfa42699} 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& zasada\+::\+Mission\+::move\+Plane (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{source\+Ship\+Name}{, }\item[{const std\+::string \&}]{plane\+Name}{, }\item[{const std\+::string \&}]{destination\+Ship\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Moves a plane from one ship to another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source\+Ship\+Name} & The source ship\textquotesingle{}s name. \\
+\hline
+{\em plane\+Name} & The name of the plane to move. \\
+\hline
+{\em destination\+Ship\+Name} & The destination ship\textquotesingle{}s name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the current \doxylink{classzasada_1_1Mission}{Mission} object. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a3cabf59d62dbd5a255257ff08cb4a0d0}\index{zasada::Mission@{zasada::Mission}!sellPlane@{sellPlane}}
+\index{sellPlane@{sellPlane}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{sellPlane()}{sellPlane()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a3cabf59d62dbd5a255257ff08cb4a0d0} 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& zasada\+::\+Mission\+::sell\+Plane (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{plane\+\_\+name}{, }\item[{const std\+::string \&}]{ship\+\_\+name}{}\end{DoxyParamCaption})}
+
+
+
+Sells a plane from a ship. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em plane\+\_\+name} & The name of the plane to sell. \\
+\hline
+{\em ship\+\_\+name} & The name of the ship the plane is assigned to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the current \doxylink{classzasada_1_1Mission}{Mission} object. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_a4f4ed3457f07e5559cb3a4556e56f74b}\index{zasada::Mission@{zasada::Mission}!sellShip@{sellShip}}
+\index{sellShip@{sellShip}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{sellShip()}{sellShip()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a4f4ed3457f07e5559cb3a4556e56f74b} 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& zasada\+::\+Mission\+::sell\+Ship (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Sells a ship from the mission. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the ship to sell. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the current \doxylink{classzasada_1_1Mission}{Mission} object. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_aaa4ba5fb6a3b3756df5d3ad5f91aaef6}\index{zasada::Mission@{zasada::Mission}!sellWeapon@{sellWeapon}}
+\index{sellWeapon@{sellWeapon}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{sellWeapon()}{sellWeapon()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_aaa4ba5fb6a3b3756df5d3ad5f91aaef6} 
+\mbox{\hyperlink{classzasada_1_1Mission}{Mission}} \& zasada\+::\+Mission\+::sell\+Weapon (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{weapon\+\_\+name}{, }\item[{const std\+::string \&}]{ship\+\_\+name}{}\end{DoxyParamCaption})}
+
+
+
+Sells a weapon from a ship. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em weapon\+\_\+name} & The name of the weapon to sell. \\
+\hline
+{\em ship\+\_\+name} & The name of the ship the weapon is assigned to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the current \doxylink{classzasada_1_1Mission}{Mission} object. 
+\end{DoxyReturn}
+\Hypertarget{classzasada_1_1Mission_aae182621d1aa40738bb760cdd890134a}\index{zasada::Mission@{zasada::Mission}!setCommander@{setCommander}}
+\index{setCommander@{setCommander}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{setCommander()}{setCommander()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_aae182621d1aa40738bb760cdd890134a} 
+void zasada\+::\+Mission\+::set\+Commander (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structzasada_1_1capitan__info}{capitan\+\_\+info}} \&}]{commander}{}\end{DoxyParamCaption})}
+
+
+
+Sets the mission commander. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em commander} & Information about the new commander. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classzasada_1_1Mission_a01a709bbb5b5814671fe339f8989f7a5}\index{zasada::Mission@{zasada::Mission}!setDamageAttacker@{setDamageAttacker}}
+\index{setDamageAttacker@{setDamageAttacker}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{setDamageAttacker()}{setDamageAttacker()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a01a709bbb5b5814671fe339f8989f7a5} 
+void zasada\+::\+Mission\+::set\+Damage\+Attacker (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{damage}{}\end{DoxyParamCaption})}
+
+
+
+Sets the damage dealt by attackers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em damage} & The new total attacker damage. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classzasada_1_1Mission_a726d8a6664b1b621a26c84c60d003036}\index{zasada::Mission@{zasada::Mission}!setDamageDefender@{setDamageDefender}}
+\index{setDamageDefender@{setDamageDefender}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{setDamageDefender()}{setDamageDefender()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a726d8a6664b1b621a26c84c60d003036} 
+void zasada\+::\+Mission\+::set\+Damage\+Defender (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{damage}{}\end{DoxyParamCaption})}
+
+
+
+Sets the damage dealt by defenders. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em damage} & The new total defender damage. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classzasada_1_1Mission_ab9567875dcb1a9edb9480ecea307c082}\index{zasada::Mission@{zasada::Mission}!setEnemyPrice@{setEnemyPrice}}
+\index{setEnemyPrice@{setEnemyPrice}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{setEnemyPrice()}{setEnemyPrice()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_ab9567875dcb1a9edb9480ecea307c082} 
+void zasada\+::\+Mission\+::set\+Enemy\+Price (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{price}{}\end{DoxyParamCaption})}
+
+
+
+Sets the cost of the enemy fleet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em price} & The new enemy fleet cost. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classzasada_1_1Mission_a54aee0e1aa146f175902b10831fe565f}\index{zasada::Mission@{zasada::Mission}!setMaxShips@{setMaxShips}}
+\index{setMaxShips@{setMaxShips}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{setMaxShips()}{setMaxShips()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a54aee0e1aa146f175902b10831fe565f} 
+void zasada\+::\+Mission\+::set\+Max\+Ships (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+Ships}{}\end{DoxyParamCaption})}
+
+
+
+Sets the maximum number of ships. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Ships} & The new maximum number of ships. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classzasada_1_1Mission_afaab2b82d678400bdd301ff56721b659}\index{zasada::Mission@{zasada::Mission}!setMaxSpend@{setMaxSpend}}
+\index{setMaxSpend@{setMaxSpend}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{setMaxSpend()}{setMaxSpend()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_afaab2b82d678400bdd301ff56721b659} 
+void zasada\+::\+Mission\+::set\+Max\+Spend (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+Spend}{}\end{DoxyParamCaption})}
+
+
+
+Sets the maximum allowed spending. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Spend} & The new maximum spending amount. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classzasada_1_1Mission_a543693be35fba1ad8617288abcf7b8cc}\index{zasada::Mission@{zasada::Mission}!setPointA@{setPointA}}
+\index{setPointA@{setPointA}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{setPointA()}{setPointA()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a543693be35fba1ad8617288abcf7b8cc} 
+void zasada\+::\+Mission\+::set\+PointA (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structzasada_1_1point}{point}} \&}]{pointA}{}\end{DoxyParamCaption})}
+
+
+
+Sets the starting point of the mission. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pointA} & The new starting point. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classzasada_1_1Mission_a7e785b97c09910bee252091eeed82b6c}\index{zasada::Mission@{zasada::Mission}!setPointB@{setPointB}}
+\index{setPointB@{setPointB}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{setPointB()}{setPointB()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a7e785b97c09910bee252091eeed82b6c} 
+void zasada\+::\+Mission\+::set\+PointB (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structzasada_1_1point}{point}} \&}]{pointB}{}\end{DoxyParamCaption})}
+
+
+
+Sets the ending point of the mission. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pointB} & The new ending point. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classzasada_1_1Mission_a2be82b033fdfcf95393c639698c9ddeb}\index{zasada::Mission@{zasada::Mission}!setSavedMoney@{setSavedMoney}}
+\index{setSavedMoney@{setSavedMoney}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{setSavedMoney()}{setSavedMoney()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_a2be82b033fdfcf95393c639698c9ddeb} 
+void zasada\+::\+Mission\+::set\+Saved\+Money (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{money}{}\end{DoxyParamCaption})}
+
+
+
+Sets the value of saved units. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em money} & The new saved money value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classzasada_1_1Mission_abb20c449c816fcc969bcb908ff736c5b}\index{zasada::Mission@{zasada::Mission}!setSpend@{setSpend}}
+\index{setSpend@{setSpend}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{setSpend()}{setSpend()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_abb20c449c816fcc969bcb908ff736c5b} 
+void zasada\+::\+Mission\+::set\+Spend (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{spend}{}\end{DoxyParamCaption})}
+
+
+
+Sets the amount of money spent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spend} & The new amount of money spent. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classzasada_1_1Mission_ab37f6950f30bacf0dae3fbaf2731e873}\index{zasada::Mission@{zasada::Mission}!setWinPrice@{setWinPrice}}
+\index{setWinPrice@{setWinPrice}!zasada::Mission@{zasada::Mission}}
+\doxysubsubsection{\texorpdfstring{setWinPrice()}{setWinPrice()}}
+{\footnotesize\ttfamily \label{classzasada_1_1Mission_ab37f6950f30bacf0dae3fbaf2731e873} 
+void zasada\+::\+Mission\+::set\+Win\+Price (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{price}{}\end{DoxyParamCaption})}
+
+
+
+Sets the required damage for victory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em price} & The new victory damage requirement. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Mission.\+hpp\end{DoxyCompactItemize}

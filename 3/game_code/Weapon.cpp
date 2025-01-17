@@ -9,6 +9,28 @@ namespace zasada {
     
     Weapon::~Weapon() {}
 
+    Weapon::Weapon(size_t _damage, 
+        std::shared_ptr<Ammo> _ammo, 
+        std::string _name, 
+        bool _activity, 
+        const size_t _max_ammo, 
+        size_t _range, 
+        size_t _fire_rate, 
+        const size_t _reload_time, 
+        size_t _reload_left, 
+        size_t _price): 
+        damage(_damage),
+        ammo(_ammo),
+        name(_name),
+        activity(_activity),
+        max_ammo(_max_ammo),
+        range(_range),
+        fire_rate(_fire_rate),
+        reload_time(_reload_time),
+        reload_left(_reload_left),
+        price(_price)
+        {}
+
     // getters
     weapon_t Weapon::getType() const{
         return type;
@@ -119,26 +141,63 @@ size_t Weapon::reload() {
             reload_left--;
     }
 
-    size_t Weapon::fire(const Ship* from, std::shared_ptr<Ship> to){
+    size_t Weapon::fire(double distance, std::shared_ptr<Ship> to){
         throw std::runtime_error("This weapon cannot fire at ships");
     }
 
-    size_t Weapon::fire(const Ship* from, std::shared_ptr<Plane> to){
+    size_t Weapon::fire(double distance, std::shared_ptr<Plane> to){
         throw std::runtime_error("This weapon cannot fire at planes");
     }
 
+    void Weapon::fireAsync(double distance, std::shared_ptr<Ship> to) {
+        std::thread([this, distance, to]() {
+            std::lock_guard<std::mutex> lock(mtx);
+            this->fire(distance, to);
+        }).detach();  // Detach thread to run asynchronously
+    }
+
+    void Weapon::fireAsync(double distance, std::shared_ptr<Plane> to) {
+        std::thread([this, distance, to]() {
+            std::lock_guard<std::mutex> lock(mtx);
+            this->fire(distance, to);
+        }).detach();  // Detach thread to run asynchronously
+    }
+
     size_t Weapon::cost(){
-        return ammo->cost() + price;
+        return price;
     }
 
-    size_t HeavyWeapon::fire(const Ship* from, std::shared_ptr<Ship> to) {
+    LightWeapon::LightWeapon(size_t _damage, 
+        std::shared_ptr<Ammo> _ammo, 
+        std::string _name, 
+        bool _activity, 
+        const size_t _max_ammo, 
+        size_t _range, 
+        size_t _fire_rate, 
+        const size_t _reload_time, 
+        size_t _reload_left, 
+        size_t _price)
+        : Weapon(_damage, _ammo, _name, _activity, _max_ammo, _range, _fire_rate, _reload_time, _reload_left, _price) {
+        type = light;
+    }
+
+    HeavyWeapon::HeavyWeapon(size_t _damage, 
+        std::shared_ptr<Ammo> _ammo, 
+        std::string _name, 
+        bool _activity, 
+        const size_t _max_ammo, 
+        size_t _range, 
+        size_t _fire_rate, 
+        const size_t _reload_time, 
+        size_t _reload_left, 
+        size_t _price)
+        : Weapon(_damage, _ammo, _name, _activity, _max_ammo, _range, _fire_rate, _reload_time, _reload_left, _price){
+            type=heavy;
+    }
+
+    size_t HeavyWeapon::fire(double distance, std::shared_ptr<Ship> to) {
         if (!activity)
             return 0;
-
-        // Calculate the distance between the source and target ships
-        zasada::point fromPosition = from->getCoordinates();
-        zasada::point toPosition = to->getCoordinates();
-        double distance = std::sqrt(std::pow(toPosition.x - fromPosition.x, 2) + std::pow(toPosition.y - fromPosition.y, 2));
 
         // Check if the target is within range
         if (distance > range) {
@@ -156,14 +215,9 @@ size_t Weapon::reload() {
         return consumed;
     }
 
-    size_t LightWeapon::fire(const Ship* from, std::shared_ptr<Plane> to) {
+    size_t LightWeapon::fire(double distance, std::shared_ptr<Plane> to) {
         if (!activity)
             return 0;
-
-        // Calculate the distance between the source and target
-        zasada::point fromPosition = from->getCoordinates();
-        zasada::point toPosition = to->getPosition();
-        double distance = std::sqrt(std::pow(toPosition.x - fromPosition.x, 2) + std::pow(toPosition.y - fromPosition.y, 2));
 
         // Check if the target is within range
         if (distance > range) {
@@ -179,5 +233,13 @@ size_t Weapon::reload() {
 
         to->takeDamage(damage);
         return consumed;
+    }
+
+    size_t LightWeapon::fire(double, std::shared_ptr<Ship>){
+        throw std::runtime_error("Can't hit a ship with light weapon");
+    }
+
+    size_t HeavyWeapon::fire(double, std::shared_ptr<Plane>){
+        throw std::runtime_error("Heavy weapon will always miss");
     }
 }

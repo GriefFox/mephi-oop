@@ -22,8 +22,10 @@ namespace zasada{
         std::string rank;
     };
     struct point{
-        int x;
-        int y;
+        double x;
+        double y;
+
+        point(double _x, double _y) : x(_x), y(_y){}; 
     };
 
     double calculate_distace(point from, point to);
